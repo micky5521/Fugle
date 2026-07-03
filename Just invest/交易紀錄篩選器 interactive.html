@@ -1583,16 +1583,36 @@
     });
   }
 
-  function makeStockChip(label, selected, onToggle, index) {
+  function makeStockChip(label, selected, onToggle, index, stockKey) {
     var chip = document.createElement("button");
     chip.type = "button";
     chip.className = "stock-chip" + (selected ? " is-selected" : "");
     chip.textContent = label;
+    if (stockKey) chip.setAttribute("data-stock", stockKey);
     chip.addEventListener("click", onToggle);
     if (typeof index === "number") {
       chip.style.animationDelay = (Math.min(index, 10) * 16) + "ms";
     }
     return chip;
+  }
+
+  function syncChipSelection() {
+    var chips = document.querySelectorAll("#sheetStockArea .stock-chip[data-stock]");
+    chips.forEach(function (chip) {
+      var key = chip.getAttribute("data-stock");
+      var selected = key === "__all__" ? sheetState.stocks.length === 0 : sheetState.stocks.indexOf(key) !== -1;
+      chip.classList.toggle("is-selected", selected);
+    });
+  }
+
+  function toggleStock(s) {
+    var i = sheetState.stocks.indexOf(s);
+    if (i === -1) {
+      sheetState.stocks = sheetState.stocks.concat([s]);
+    } else {
+      sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
+    }
+    syncChipSelection();
   }
 
   function renderSheetStockChips() {
@@ -1608,8 +1628,8 @@
 
       grid.appendChild(makeStockChip("全部", sheetState.stocks.length === 0, function () {
         sheetState.stocks = [];
-        renderSheetStockChips();
-      }, 0));
+        syncChipSelection();
+      }, 0, "__all__"));
 
       var div = document.createElement("span");
       div.className = "sheet-divider";
@@ -1617,14 +1637,7 @@
 
       STOCKS.forEach(function (s, i) {
         var selected = sheetState.stocks.indexOf(s) !== -1;
-        grid.appendChild(makeStockChip(s, selected, function () {
-          if (selected) {
-            sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
-          } else {
-            sheetState.stocks = sheetState.stocks.concat([s]);
-          }
-          renderSheetStockChips();
-        }, i + 1));
+        grid.appendChild(makeStockChip(s, selected, function () { toggleStock(s); }, i + 1, s));
       });
 
       el.appendChild(grid);
@@ -1651,14 +1664,7 @@
     resultGrid.className = "stock-chip-grid";
     candidates.forEach(function (s, i) {
       var selected = sheetState.stocks.indexOf(s) !== -1;
-      resultGrid.appendChild(makeStockChip(s, selected, function () {
-        if (selected) {
-          sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
-        } else {
-          sheetState.stocks = sheetState.stocks.concat([s]);
-        }
-        renderSheetStockChips();
-      }, i));
+      resultGrid.appendChild(makeStockChip(s, selected, function () { toggleStock(s); }, i, s));
     });
     el.appendChild(resultGrid);
   }
