@@ -1376,6 +1376,9 @@
         } else {
           state.categories = state.categories.concat([cat]);
         }
+        if (state.categories.length === Object.keys(ACTIONS).length) {
+          state.categories = [];
+        }
         renderAll();
       });
       el.appendChild(btn);
@@ -1577,6 +1580,9 @@
           sheetState.categories = sheetState.categories.filter(function (x) { return x !== cat; });
         } else {
           sheetState.categories = sheetState.categories.concat([cat]);
+        }
+        if (sheetState.categories.length === SHEET_CATEGORIES.length) {
+          sheetState.categories = [];
         }
         renderSheetCategoryChips();
       });
