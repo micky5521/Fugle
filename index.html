@@ -2,10 +2,69 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8" />
-<meta http-equiv="refresh" content="0; url=./Just%20invest/JI%20app%20interactive%20demo.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fugle Prototypes</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --ink: #222;
+    --ink-muted: #6b6b6b;
+    --border: #e5e5e5;
+    --surface: #fff;
+    --bg: #f7f6f4;
+    --accent: #fa5a00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f0f0f0;
+      --ink-muted: #9a9a9a;
+      --border: #333;
+      --surface: #1c1c1e;
+      --bg: #111;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 48px 20px;
+  }
+  main { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  p.sub { color: var(--ink-muted); margin: 0 0 28px; font-size: 14px; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  li a {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+  }
+  li a:hover { border-color: var(--accent); }
+  .name { font-weight: 600; font-size: 15px; }
+  .path { font-size: 12.5px; color: var(--ink-muted); font-family: ui-monospace, monospace; }
+</style>
 </head>
 <body>
-<p><a href="./Just%20invest/JI%20app%20interactive%20demo.html">JI app interactive demo</a></p>
+<main>
+  <h1>Fugle Prototypes</h1>
+  <p class="sub">互動原型索引 — 新增原型時請把連結加進下面清單</p>
+  <ul>
+    <li>
+      <a href="./Just invest/JI app interactive demo.html">
+        <span class="name">JI app interactive demo</span>
+        <span class="path">Just invest/JI app interactive demo.html</span>
+      </a>
+    </li>
+  </ul>
+</main>
 </body>
 </html>
