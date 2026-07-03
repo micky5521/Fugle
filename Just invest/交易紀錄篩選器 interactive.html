@@ -767,6 +767,7 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 8px 12px 8px 16px;
+    transition: border-color 0.18s ease;
   }
 
   .sheet-search:focus {
@@ -788,6 +789,16 @@
     white-space: nowrap;
   }
 
+  @keyframes stockAreaEnter {
+    from { opacity: 0; transform: translateY(5px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes chipEnter {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
   .sheet-empty {
     display: flex;
     flex-direction: column;
@@ -797,6 +808,11 @@
     height: 160px;
     padding: 24px 30px;
     text-align: center;
+    animation: stockAreaEnter 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .sheet-empty-icon {
+    animation: chipEnter 0.3s 0.05s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
   }
 
   .sheet-empty-icon {
@@ -824,6 +840,7 @@
     gap: 8px;
     height: 160px;
     overflow-y: auto;
+    animation: stockAreaEnter 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   #sheetStockArea { height: 160px; }
@@ -838,7 +855,11 @@
     line-height: 16px;
     padding: 8px 10px;
     cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    animation: chipEnter 0.2s cubic-bezier(0.3, 0.9, 0.3, 1) backwards;
   }
+
+  .stock-chip:active { transform: scale(0.94); }
 
   .stock-chip.is-selected {
     background: var(--tag-dark-bg);
@@ -1621,12 +1642,15 @@
     });
   }
 
-  function makeStockChip(label, selected, onToggle) {
+  function makeStockChip(label, selected, onToggle, index) {
     var chip = document.createElement("button");
     chip.type = "button";
     chip.className = "stock-chip" + (selected ? " is-selected" : "");
     chip.textContent = label;
     chip.addEventListener("click", onToggle);
+    if (typeof index === "number") {
+      chip.style.animationDelay = (Math.min(index, 10) * 16) + "ms";
+    }
     return chip;
   }
 
@@ -1644,13 +1668,13 @@
       grid.appendChild(makeStockChip("全部", sheetState.stocks.length === 0, function () {
         sheetState.stocks = [];
         renderSheetStockChips();
-      }));
+      }, 0));
 
       var div = document.createElement("span");
       div.className = "sheet-divider";
       grid.appendChild(div);
 
-      STOCKS.forEach(function (s) {
+      STOCKS.forEach(function (s, i) {
         var selected = sheetState.stocks.indexOf(s) !== -1;
         grid.appendChild(makeStockChip(s, selected, function () {
           if (selected) {
@@ -1659,7 +1683,7 @@
             sheetState.stocks = sheetState.stocks.concat([s]);
           }
           renderSheetStockChips();
-        }));
+        }, i + 1));
       });
 
       el.appendChild(grid);
@@ -1684,7 +1708,7 @@
 
     var resultGrid = document.createElement("div");
     resultGrid.className = "stock-chip-grid";
-    candidates.forEach(function (s) {
+    candidates.forEach(function (s, i) {
       var selected = sheetState.stocks.indexOf(s) !== -1;
       resultGrid.appendChild(makeStockChip(s, selected, function () {
         if (selected) {
@@ -1693,7 +1717,7 @@
           sheetState.stocks = sheetState.stocks.concat([s]);
         }
         renderSheetStockChips();
-      }));
+      }, i));
     });
     el.appendChild(resultGrid);
   }
