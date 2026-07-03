@@ -488,44 +488,6 @@
     cursor: pointer;
   }
 
-  .custom-date-summary {
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
-    background: var(--surface-subtle);
-    border-radius: 8px;
-    padding: 4px 4px 4px 8px;
-    border: none;
-    font-family: inherit;
-    cursor: pointer;
-    color: var(--ink);
-  }
-
-  .custom-date-summary.is-visible { display: flex; }
-
-  .custom-date-summary .date-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-
-  .custom-date-summary .date-group .label { color: var(--ink-muted); }
-  .custom-date-summary .date-group .value { color: var(--ink); font-variant-numeric: tabular-nums; }
-
-  .custom-date-summary .chevron-down {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-muted);
-  }
-
   .filter-row {
     display: flex;
     align-items: center;
@@ -1080,14 +1042,6 @@
       <div class="panel">
         <div class="segment" id="segment" role="tablist" aria-label="日期區間"></div>
 
-        <button class="custom-date-summary" type="button" id="customDateSummary">
-          <span class="date-group"><span class="label">開始日</span><span class="value" id="customSummaryStart">-</span></span>
-          <span class="date-group"><span class="label">結束日</span><span class="value" id="customSummaryEnd">-</span></span>
-          <span class="chevron-down">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </button>
-
         <div class="filter-row">
           <button class="tune-btn" type="button" id="tuneBtn" aria-label="重設篩選">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="6" r="2.2" fill="currentColor"/><line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="12" r="2.2" fill="currentColor"/><line x1="4" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="18" r="2.2" fill="currentColor"/></svg>
@@ -1570,19 +1524,8 @@
     badge.textContent = count;
   }
 
-  function renderCustomDateSummary() {
-    var el = document.getElementById("customDateSummary");
-    var isCustom = state.range === "custom";
-    el.classList.toggle("is-visible", isCustom);
-    if (isCustom) {
-      document.getElementById("customSummaryStart").textContent = fmtSlash(new Date(state.customStart + "T00:00:00"));
-      document.getElementById("customSummaryEnd").textContent = fmtSlash(new Date(state.customEnd + "T00:00:00"));
-    }
-  }
-
   function renderAll() {
     renderSegment();
-    renderCustomDateSummary();
     renderCategoryChips();
     renderStockFilterArea();
     renderTuneButton();
@@ -1593,8 +1536,6 @@
     renderBody(sorted);
     renderSummary(filtered);
   }
-
-  document.getElementById("customDateSummary").addEventListener("click", function () { openDateSheet(); });
 
   document.getElementById("backBtn").addEventListener("click", function () {
     var btn = this;
