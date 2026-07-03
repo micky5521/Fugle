@@ -1,0 +1,1980 @@
+<title>交易紀錄 · 互動原型</title>
+<style>
+  :root {
+    --backdrop-1: #efece6;
+    --backdrop-2: #e5ded3;
+    --bezel: #1b1a18;
+    --bezel-edge: #35322d;
+    --surface: #ffffff;
+    --surface-variant: #f5f5f5;
+    --border: #eaeaea;
+    --border-heavy: #dfdfdf;
+    --ink: #323232;
+    --ink-muted: #8b8a8a;
+    --ink-faint: #c3c1bd;
+    --accent: #fa5a00;
+    --accent-soft: #fff5f0;
+    --accent-ink: #ffffff;
+    --gain: #e83c3c;
+    --loss: #339c09;
+    --shadow: rgba(35, 26, 15, 0.22);
+    --caption-ink: #6b675f;
+    --link: #32a0dc;
+    --placeholder: #b3b2b2;
+    --tag-dark-bg: #545454;
+    --overlay: rgba(0, 0, 0, 0.5);
+    --surface-variant-high: #eaeaea;
+    --surface-subtle: #fafafa;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --backdrop-1: #111013;
+      --backdrop-2: #1a181c;
+      --bezel: #050505;
+      --bezel-edge: #232226;
+      --surface: #1c1c1e;
+      --surface-variant: #262629;
+      --border: #333338;
+      --border-heavy: #424248;
+      --ink: #f1efec;
+      --ink-muted: #9c9a9e;
+      --ink-faint: #45444a;
+      --accent: #ff7a35;
+      --accent-soft: rgba(255, 122, 53, 0.16);
+      --accent-ink: #1c1c1e;
+      --gain: #ff6a6a;
+      --loss: #43c62c;
+      --shadow: rgba(0, 0, 0, 0.55);
+      --caption-ink: #b9b6b0;
+      --link: #57b8f2;
+      --placeholder: #6f6e72;
+      --tag-dark-bg: #3a3a3d;
+      --overlay: rgba(0, 0, 0, 0.6);
+      --surface-variant-high: #38383c;
+      --surface-subtle: #222124;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --backdrop-1: #111013;
+    --backdrop-2: #1a181c;
+    --bezel: #050505;
+    --bezel-edge: #232226;
+    --surface: #1c1c1e;
+    --surface-variant: #262629;
+    --border: #333338;
+    --border-heavy: #424248;
+    --ink: #f1efec;
+    --ink-muted: #9c9a9e;
+    --ink-faint: #45444a;
+    --accent: #ff7a35;
+    --accent-soft: rgba(255, 122, 53, 0.16);
+    --accent-ink: #1c1c1e;
+    --gain: #ff6a6a;
+    --loss: #43c62c;
+    --shadow: rgba(0, 0, 0, 0.55);
+    --caption-ink: #b9b6b0;
+    --link: #57b8f2;
+    --placeholder: #6f6e72;
+    --tag-dark-bg: #3a3a3d;
+    --overlay: rgba(0, 0, 0, 0.6);
+    --surface-variant-high: #38383c;
+    --surface-subtle: #222124;
+  }
+
+  :root[data-theme="light"] {
+    --backdrop-1: #efece6;
+    --backdrop-2: #e5ded3;
+    --bezel: #1b1a18;
+    --bezel-edge: #35322d;
+    --surface: #ffffff;
+    --surface-variant: #f5f5f5;
+    --border: #eaeaea;
+    --border-heavy: #dfdfdf;
+    --ink: #323232;
+    --ink-muted: #8b8a8a;
+    --ink-faint: #c3c1bd;
+    --accent: #fa5a00;
+    --accent-soft: #fff5f0;
+    --accent-ink: #ffffff;
+    --gain: #e83c3c;
+    --loss: #339c09;
+    --shadow: rgba(35, 26, 15, 0.22);
+    --caption-ink: #6b675f;
+    --link: #32a0dc;
+    --placeholder: #b3b2b2;
+    --tag-dark-bg: #545454;
+    --overlay: rgba(0, 0, 0, 0.5);
+    --surface-variant-high: #eaeaea;
+    --surface-subtle: #fafafa;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html, body {
+    margin: 0;
+    min-height: 100%;
+  }
+
+  body {
+    font-family: "LINE Seed TW", "LINE Seed TW_TTF", -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 18% 12%, var(--backdrop-2), transparent 55%),
+      radial-gradient(circle at 84% 88%, var(--backdrop-2), transparent 50%),
+      var(--backdrop-1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 22px;
+    padding: 48px 20px 64px;
+  }
+
+  .studio-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .studio-tag .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .studio-tag h1 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .studio-tag p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--caption-ink);
+    max-width: 320px;
+    line-height: 1.5;
+  }
+
+  .device {
+    background: linear-gradient(160deg, var(--bezel-edge), var(--bezel) 60%);
+    border-radius: 52px;
+    padding: 14px;
+    box-shadow: 0 30px 60px -20px var(--shadow), 0 2px 10px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  .screen {
+    width: 402px;
+    height: 852px;
+    background: var(--surface);
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .dynamic-island {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 108px;
+    height: 28px;
+    background: var(--bezel);
+    border-radius: 16px;
+    z-index: 20;
+  }
+
+  .chrome {
+    flex-shrink: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 26px 8px;
+  }
+
+  .status-bar .time {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 4px;
+    position: relative;
+  }
+
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .icon-btn:hover { background: var(--surface-variant); }
+
+  .header-row h2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .panel {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .segment {
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--accent-soft);
+    gap: 1px;
+  }
+
+  .segment button {
+    flex: 1;
+    border: none;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 15px;
+    font-family: inherit;
+    padding: 9px 4px;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .segment button:hover { background: color-mix(in srgb, var(--accent-soft) 60%, var(--accent) 15%); }
+
+  .segment button[aria-pressed="true"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 700;
+  }
+
+  /* Date range picker sheet */
+  .date-sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    flex-shrink: 0;
+  }
+
+  .date-sheet-header .sheet-title { position: static; transform: none; }
+
+  .date-sheet-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px 16px;
+    overflow-y: auto;
+  }
+
+  .date-preset-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .date-preset-chip {
+    border-radius: 8px;
+    border: none;
+    background: var(--surface-variant);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+
+  .date-preset-chip[aria-pressed="true"] {
+    background: var(--tag-dark-bg);
+    color: #fff;
+  }
+
+  .date-hr { height: 1px; background: var(--border); border: none; margin: 0; width: 100%; }
+
+  .date-summary-row {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+  }
+
+  .date-summary-item {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .date-summary-item .label { color: var(--ink-muted); }
+  .date-summary-item .value { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .date-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .date-nav-label {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 20px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .date-nav-btns { display: flex; gap: 16px; }
+
+  .date-nav-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .date-nav-btn:hover { background: var(--surface-variant); }
+  .date-nav-btn:disabled { color: var(--ink-faint); cursor: default; }
+  .date-nav-btn:disabled:hover { background: none; }
+
+  .calendar-weekdays,
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .calendar-weekdays div {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-muted);
+    padding: 6px 0;
+  }
+
+  .calendar-day-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 0;
+  }
+
+  .calendar-day {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .calendar-day:hover { background: var(--surface-variant); }
+
+  .calendar-day.is-outside { color: var(--ink-faint); cursor: default; }
+  .calendar-day.is-outside:hover { background: none; }
+
+  .calendar-day.is-today { border: 1.5px solid var(--ink); }
+
+  .calendar-day.is-endpoint {
+    background: var(--tag-dark-bg);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .calendar-day-cell.is-in-range { background: var(--surface-variant); }
+  .calendar-day-cell.is-range-start { border-radius: 50% 0 0 50%; }
+  .calendar-day-cell.is-range-end { border-radius: 0 50% 50% 0; }
+
+  .date-hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .date-confirm-btn {
+    width: 100%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .date-confirm-btn:disabled {
+    background: var(--surface-variant);
+    color: var(--ink-faint);
+    cursor: default;
+  }
+
+  .date-cancel-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 0 4px;
+    cursor: pointer;
+  }
+
+  .custom-date-summary {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    background: var(--surface-subtle);
+    border-radius: 8px;
+    padding: 4px 4px 4px 8px;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--ink);
+  }
+
+  .custom-date-summary.is-visible { display: flex; }
+
+  .custom-date-summary .date-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .custom-date-summary .date-group .label { color: var(--ink-muted); }
+  .custom-date-summary .date-group .value { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .custom-date-summary .chevron-down {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-muted);
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-scroll {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filter-scroll::-webkit-scrollbar { display: none; }
+
+  .filter-scroll > * { flex-shrink: 0; }
+
+  .chip {
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+
+  .chip:hover { border-color: var(--accent); }
+
+  .chip[aria-pressed="true"] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .tune-btn {
+    position: relative;
+    flex-shrink: 0;
+    width: 36px;
+    height: 32px;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.15s;
+  }
+
+  .tune-btn:hover { background: var(--surface-variant); }
+
+  .tune-btn .badge {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 7px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 14px;
+    text-align: center;
+  }
+
+  .stock-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--ink);
+    background: var(--surface-variant);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+
+  .stock-filter-btn .chevron {
+    width: 7px;
+    height: 7px;
+    border-right: 1.6px solid var(--ink-muted);
+    border-bottom: 1.6px solid var(--ink-muted);
+    transform: rotate(45deg) translate(-1px, -1px);
+    flex-shrink: 0;
+  }
+
+  .selected-stock-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    background: var(--tag-dark-bg);
+    color: #fff;
+    font-size: 14px;
+    line-height: 16px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+
+  .selected-stock-pill svg { flex-shrink: 0; }
+
+  /* Filter bottom sheet */
+  .sheet-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--overlay);
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .sheet-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .bottom-sheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--surface);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.25s ease;
+    max-height: 86%;
+  }
+
+  .sheet-overlay.is-open .bottom-sheet {
+    transform: translateY(0);
+  }
+
+  .sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 12px 16px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .sheet-reset {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--link);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .sheet-close {
+    background: none;
+    border: none;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+  }
+
+  .sheet-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .sheet-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 16px 16px;
+    overflow-y: auto;
+  }
+
+  .sheet-section-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    margin: 0 0 8px;
+  }
+
+  .sheet-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sheet-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .sheet-search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .sheet-search {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px 8px 16px;
+  }
+
+  .sheet-search:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .sheet-search::placeholder { color: var(--placeholder); }
+
+  .sheet-clear {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--link);
+    cursor: pointer;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  .sheet-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 160px;
+    padding: 24px 30px;
+    text-align: center;
+  }
+
+  .sheet-empty-icon {
+    width: 76px;
+    height: 76px;
+    border-radius: 100px;
+    background: var(--surface-variant-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+
+  .sheet-empty p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--ink);
+  }
+
+  .stock-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 8px;
+    height: 160px;
+    overflow-y: auto;
+  }
+
+  #sheetStockArea { height: 160px; }
+
+  .stock-chip {
+    border-radius: 8px;
+    border: none;
+    background: var(--surface-variant);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+
+  .stock-chip.is-selected {
+    background: var(--tag-dark-bg);
+    color: #fff;
+  }
+
+  .sheet-apply {
+    width: 100%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .sheet-apply-wrap {
+    padding: 0 16px 16px;
+    flex-shrink: 0;
+  }
+
+  .sheet-home-indicator {
+    height: 21px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 8px;
+    flex-shrink: 0;
+  }
+
+  .sheet-home-indicator span {
+    width: 139px;
+    height: 5px;
+    border-radius: 100px;
+    background: var(--ink);
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 18px 0 6px;
+    text-align: center;
+  }
+
+  .summary .label {
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .summary .value {
+    font-size: 22px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  .summary .range-text {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border-top: 1px solid var(--border-heavy);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-heavy);
+    z-index: 5;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 8px 8px;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  thead th.num { text-align: right; }
+
+  th button.sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    font: inherit;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  th.num button.sort { flex-direction: row-reverse; }
+
+  .sort-icon {
+    display: inline-flex;
+    flex-direction: column;
+    width: 10px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+
+  .sort-icon span {
+    width: 0;
+    height: 0;
+    border-left: 3.5px solid transparent;
+    border-right: 3.5px solid transparent;
+  }
+
+  .sort-icon .up { border-bottom: 4px solid var(--ink-faint); margin-bottom: 1.5px; }
+  .sort-icon .down { border-top: 4px solid var(--ink-faint); }
+  .sort-icon.asc .up { border-bottom-color: var(--accent); }
+  .sort-icon.desc .down { border-top-color: var(--accent); }
+
+  tbody td {
+    padding: 8px 8px;
+    font-size: 16px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  td.date-cell {
+    padding-left: 12px;
+  }
+
+  td.date-cell .d { font-size: 14px; color: var(--ink); }
+  td.date-cell .y { font-size: 12px; color: var(--ink-muted); display: block; line-height: 1.3; }
+
+  .action-buy { color: var(--gain); font-weight: 500; }
+  .action-sell { color: var(--loss); font-weight: 500; }
+
+  .stock-cell { font-size: 14px; }
+
+  .pnl-gain { color: var(--gain); }
+  .pnl-loss { color: var(--loss); }
+  .pnl-flat { color: var(--ink-muted); }
+
+  .empty-state {
+    padding: 40px 16px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  .foot-note {
+    max-width: 340px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--caption-ink);
+  }
+
+  button:focus-visible,
+  select:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .scroll-area::-webkit-scrollbar,
+  .table-wrap::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scroll-area::-webkit-scrollbar-thumb,
+  .table-wrap::-webkit-scrollbar-thumb {
+    background: var(--border-heavy);
+    border-radius: 3px;
+  }
+</style>
+
+<div class="studio-tag">
+  <span class="eyebrow">互動原型 · Prototype</span>
+  <h1>交易紀錄</h1>
+  <p>依 Figma 設計稿還原，日期區間、分類篩選與欄位排序皆可即時運算 — 表格資料為模擬產生，非真實交易紀錄。</p>
+</div>
+
+<div class="device">
+  <div class="screen">
+    <div class="dynamic-island"></div>
+    <div class="chrome">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <span class="status-icons">
+          <svg width="19" height="12" viewBox="0 0 19 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="0.6" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="0.6" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="0.6" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="0.6" fill="currentColor"/></svg>
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M8.5 10.6a1.3 1.3 0 100-2.6 1.3 1.3 0 000 2.6z" fill="currentColor"/><path d="M4.9 6.9a5.1 5.1 0 017.2 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M2 4a9 9 0 0113 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x="0.75" y="0.75" width="21.5" height="11.5" rx="3" stroke="currentColor" stroke-width="1.1"/><rect x="2.3" y="2.3" width="18.4" height="8.4" rx="1.6" fill="currentColor"/><rect x="23" y="4" width="2" height="5" rx="1" fill="currentColor"/></svg>
+        </span>
+      </div>
+      <div class="header-row">
+        <button class="icon-btn" type="button" aria-label="返回" id="backBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2>交易紀錄</h2>
+      </div>
+    </div>
+
+    <div class="scroll-area">
+      <div class="panel">
+        <div class="segment" id="segment" role="tablist" aria-label="日期區間"></div>
+
+        <button class="custom-date-summary" type="button" id="customDateSummary">
+          <span class="date-group"><span class="label">開始日</span><span class="value" id="customSummaryStart">-</span></span>
+          <span class="date-group"><span class="label">結束日</span><span class="value" id="customSummaryEnd">-</span></span>
+          <span class="chevron-down">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+
+        <div class="filter-row">
+          <button class="tune-btn" type="button" id="tuneBtn" aria-label="重設篩選">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="6" r="2.2" fill="currentColor"/><line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="12" r="2.2" fill="currentColor"/><line x1="4" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="18" r="2.2" fill="currentColor"/></svg>
+            <span class="badge" id="tuneBadge" hidden>0</span>
+          </button>
+          <div class="filter-scroll">
+            <div id="categoryChips" style="display:flex; gap:8px; flex-shrink:0;"></div>
+            <div id="stockFilterArea" style="display:flex; align-items:center; gap:8px; flex-wrap:nowrap; flex-shrink:0;"></div>
+          </div>
+        </div>
+
+        <div class="summary">
+          <span class="label">期間損益</span>
+          <span class="value" id="summaryValue">0</span>
+          <span class="range-text" id="summaryRange"></span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr id="tableHead"></tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="emptyState" style="display:none;">這個區間內沒有符合篩選條件的交易紀錄</div>
+    </div>
+
+    <div class="sheet-overlay" id="sheetOverlay">
+      <div class="bottom-sheet" role="dialog" aria-modal="true" id="bottomSheet" aria-labelledby="sheetTitle">
+        <div class="sheet-header">
+          <button class="sheet-reset" type="button" id="sheetReset">重設</button>
+          <span class="sheet-title" id="sheetTitle">篩選紀錄</span>
+          <button class="sheet-close" type="button" id="sheetClose" aria-label="關閉">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="sheet-body">
+          <div id="sheetCategorySection">
+            <p class="sheet-section-label">篩選類別</p>
+            <div class="sheet-chip-row" id="sheetCategoryChips"></div>
+          </div>
+          <div>
+            <p class="sheet-section-label" id="sheetStockLabel">篩選個股</p>
+            <div class="sheet-search-row">
+              <input class="sheet-search" type="text" id="sheetSearch" placeholder="輸入股票名稱或代碼" autocomplete="off" />
+              <button class="sheet-clear" type="button" id="sheetClear" hidden>清除</button>
+            </div>
+            <div id="sheetStockArea"></div>
+          </div>
+        </div>
+        <div class="sheet-apply-wrap">
+          <button class="sheet-apply" type="button" id="sheetApply">套用</button>
+        </div>
+        <div class="sheet-home-indicator"><span></span></div>
+      </div>
+    </div>
+
+    <div class="sheet-overlay" id="dateSheetOverlay">
+      <div class="bottom-sheet" role="dialog" aria-modal="true" aria-label="篩選時間">
+        <div class="date-sheet-header">
+          <span class="sheet-title">篩選時間</span>
+        </div>
+        <div class="date-sheet-body">
+          <div class="date-preset-row" id="datePresetRow"></div>
+          <hr class="date-hr" />
+          <div class="date-summary-row">
+            <div class="date-summary-item">
+              <span class="label">開始日</span>
+              <span class="value" id="dateStartValue">-</span>
+            </div>
+            <div class="date-summary-item">
+              <span class="label">結束日</span>
+              <span class="value" id="dateEndValue">-</span>
+            </div>
+          </div>
+          <hr class="date-hr" />
+          <div class="date-nav-row">
+            <span class="date-nav-label" id="dateNavLabel"></span>
+            <div class="date-nav-btns">
+              <button class="date-nav-btn" type="button" id="dateNavPrev" aria-label="上個月">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="date-nav-btn" type="button" id="dateNavNext" aria-label="下個月">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="calendar-weekdays">
+            <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+          <p class="date-hint">查詢區間最長為一年<br />台灣時區 UTC+8</p>
+          <button class="date-confirm-btn" type="button" id="dateConfirm" disabled>確認</button>
+          <button class="date-cancel-btn" type="button" id="dateCancel">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="foot-note">點選上方分類、日期區間，或表格欄位標題，畫面會即時重新篩選、加總與排序 — 完整模擬吉盈 App「交易紀錄」頁面的實際運作邏輯。</p>
+
+<script>
+(function () {
+  "use strict";
+
+  var NOW = new Date(2026, 6, 3); // 2026-07-03
+
+  var STOCKS = ["元大台灣50", "凱基台灣TOP50", "台新金", "富邦金", "台積電", "聯發科", "中華電", "兆豐金", "國泰金", "元大高股息", "中信金", "玉山金", "鴻海", "穩懋", "力積電", "華邦電", "旺宏", "聯電"];
+
+  // action map per category: [openAction, closeAction]
+  var ACTIONS = {
+    "現股": ["現買", "現賣"],
+    "融資": ["資買", "資賣"],
+    "融券": ["券賣", "券買"]
+  };
+
+  var RAW = [
+    ["2026-07-02","現股","元大台灣50",73.80,2000,2600],
+    ["2026-07-01","現股","台積電",1015.00,1000,null],
+    ["2026-06-30","融資","富邦金",92.40,3000,-1800],
+    ["2026-06-28","現股","中華電",128.50,2000,1400],
+    ["2026-06-24","融券","國泰金",64.20,4000,-2200],
+    ["2026-06-18","現股","凱基台灣TOP50",10.85,10000,1200],
+    ["2026-06-12","現股","元大台灣50",72.50,2000,2650],
+    ["2026-06-11","現股","凱基台灣TOP50",10.73,10000,2800],
+    ["2026-06-05","融資","台新金",24.90,5000,null],
+    ["2026-05-29","現股","聯發科",1180.00,500,-4200],
+    ["2026-05-23","現股","台新金",24.53,5000,3000],
+    ["2026-05-21","現股","元大台灣50",72.50,2000,2650],
+    ["2026-05-14","融券","兆豐金",38.60,4000,null],
+    ["2026-05-08","現股","中信金",34.10,5000,1650],
+    ["2026-04-30","融資","富邦金",90.80,3000,2100],
+    ["2026-04-25","現股","元大高股息",19.85,8000,null],
+    ["2026-04-18","融券","國泰金",63.40,4000,1900],
+    ["2026-04-10","現股","玉山金",29.60,6000,-980],
+    ["2026-04-02","現股","元大台灣50",72.50,2000,2650],
+    ["2026-04-01","現股","元大台灣50",72.50,2000,2650],
+    ["2026-03-25","融資","台新金",23.80,5000,-1500],
+    ["2026-03-18","現股","中華電",126.00,2000,null],
+    ["2026-03-10","現股","台積電",985.00,1000,6200],
+    ["2026-03-03","現股","元大台灣50",72.50,2000,2650],
+    ["2026-02-24","融券","兆豐金",37.90,4000,-2600],
+    ["2026-02-16","現股","凱基台灣TOP50",10.40,10000,null],
+    ["2026-02-06","融資","富邦金",88.60,3000,1750],
+    ["2026-01-20","現股","聯發科",1120.00,500,3800],
+    ["2026-01-12","現股","元大高股息",19.30,8000,860],
+    ["2026-01-05","融券","國泰金",61.80,4000,null],
+    ["2025-12-22","現股","玉山金",28.90,6000,1420],
+    ["2025-12-10","現股","中信金",33.40,5000,null],
+    ["2025-11-26","融資","台新金",22.90,5000,2250],
+    ["2025-11-08","現股","台積電",940.00,1000,-3100],
+    ["2025-10-21","現股","元大台灣50",70.80,2000,null],
+    ["2025-10-05","融券","兆豐金",36.50,4000,1680],
+    ["2025-09-18","現股","中華電",122.50,2000,890],
+    ["2025-08-27","現股","凱基台灣TOP50",10.05,10000,-1450],
+    ["2025-07-30","融資","富邦金",85.90,3000,null],
+    ["2025-07-15","現股","元大高股息",18.70,8000,2050]
+  ].map(function (r) {
+    var cat = r[1];
+    var acts = ACTIONS[cat];
+    var isClose = r[5] !== null;
+    return {
+      date: r[0],
+      category: cat,
+      action: isClose ? acts[1] : acts[0],
+      isClose: isClose,
+      stock: r[2],
+      price: r[3],
+      shares: r[4],
+      realized: r[5]
+    };
+  });
+
+  var RANGES = [
+    { key: "3d", label: "近 3 日" },
+    { key: "1m", label: "近 1 月" },
+    { key: "3m", label: "近 3 月" },
+    { key: "1y", label: "近 1 年" },
+    { key: "custom", label: "自訂" }
+  ];
+
+  var state = {
+    range: "3m",
+    customStart: "2026-04-03",
+    customEnd: "2026-07-03",
+    categories: [],
+    stocks: [],
+    sortKey: "date",
+    sortDir: "desc"
+  };
+
+  var sheetState = {
+    open: false,
+    mode: "full",
+    categories: [],
+    stocks: [],
+    query: "",
+    searchActive: false
+  };
+
+  var EMPTY_ICON = '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="7" y="5" width="16" height="26" rx="2" stroke="currentColor" stroke-width="2"/><rect x="13" y="9" width="16" height="22" rx="2" fill="var(--surface-variant-high)" stroke="currentColor" stroke-width="2"/><line x1="17" y1="15" x2="25" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="25" x2="22" y2="25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+  function toISO(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function fmtSlash(d) { return d.getFullYear() + "/" + pad(d.getMonth() + 1) + "/" + pad(d.getDate()); }
+
+  function subMonths(date, n) {
+    var d = new Date(date);
+    d.setMonth(d.getMonth() - n);
+    return d;
+  }
+  function subDays(date, n) {
+    var d = new Date(date);
+    d.setDate(d.getDate() - n);
+    return d;
+  }
+
+  function getBounds() {
+    var end = NOW;
+    var start;
+    switch (state.range) {
+      case "3d": start = subDays(NOW, 3); break;
+      case "1m": start = subMonths(NOW, 1); break;
+      case "3m": start = subMonths(NOW, 3); break;
+      case "1y": start = subMonths(NOW, 12); break;
+      case "custom":
+        start = new Date(state.customStart + "T00:00:00");
+        end = new Date(state.customEnd + "T00:00:00");
+        break;
+    }
+    return { start: start, end: end };
+  }
+
+  function fmtInt(n) { return n.toLocaleString("en-US"); }
+  function fmtPrice(n) {
+    return n % 1 === 0 ? n.toLocaleString("en-US") : n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function fmtSigned(n) {
+    var s = Math.round(n).toLocaleString("en-US");
+    return n > 0 ? "+" + s : s;
+  }
+  function fmtPct(n) {
+    var s = Math.abs(n) < 10 ? n.toFixed(1) : Math.round(n).toString();
+    return (n > 0 ? "+" : "") + s + "%";
+  }
+  function pnlClass(n) {
+    if (n > 0) return "pnl-gain";
+    if (n < 0) return "pnl-loss";
+    return "pnl-flat";
+  }
+
+  function getFiltered() {
+    var b = getBounds();
+    return RAW.filter(function (r) {
+      var d = new Date(r.date + "T00:00:00");
+      if (d < b.start || d > b.end) return false;
+      if (state.categories.length > 0 && state.categories.indexOf(r.category) === -1) return false;
+      if (state.stocks.length > 0 && state.stocks.indexOf(r.stock) === -1) return false;
+      return true;
+    });
+  }
+
+  var COLUMNS = [
+    { key: "date", label: "成交日", align: "left", sortable: true },
+    { key: "action", label: "交易別", align: "left", sortable: false },
+    { key: "stock", label: "股名", align: "left", sortable: false },
+    { key: "price", label: "成交均價", align: "right", sortable: true },
+    { key: "shares", label: "股數小計", align: "right", sortable: true },
+    { key: "realized", label: "已實現", align: "right", sortable: true },
+    { key: "realizedPct", label: "已實現損益率", align: "right", sortable: true }
+  ];
+
+  function withPct(r) {
+    var pct = r.realized === null ? null : (r.realized / (r.price * r.shares)) * 100;
+    var o = {};
+    for (var k in r) o[k] = r[k];
+    o.realizedPct = pct;
+    return o;
+  }
+
+  function sortRows(rows) {
+    var key = state.sortKey, dir = state.sortDir;
+    var sorted = rows.slice().sort(function (a, b) {
+      var av = a[key], bv = b[key];
+      if (key === "date") { av = a.date; bv = b.date; }
+      if (av === null) av = -Infinity;
+      if (bv === null) bv = -Infinity;
+      if (av < bv) return dir === "asc" ? -1 : 1;
+      if (av > bv) return dir === "asc" ? 1 : -1;
+      return 0;
+    });
+    return sorted;
+  }
+
+  function renderSegment() {
+    var el = document.getElementById("segment");
+    el.innerHTML = "";
+    RANGES.forEach(function (r) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = r.label;
+      btn.setAttribute("aria-pressed", state.range === r.key ? "true" : "false");
+      btn.addEventListener("click", function () {
+        if (r.key === "custom") {
+          openDateSheet();
+          return;
+        }
+        state.range = r.key;
+        renderAll();
+      });
+      el.appendChild(btn);
+    });
+  }
+
+  function renderCategoryChips() {
+    var el = document.getElementById("categoryChips");
+    el.innerHTML = "";
+    Object.keys(ACTIONS).forEach(function (cat) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip";
+      btn.textContent = cat;
+      var selected = state.categories.indexOf(cat) !== -1;
+      btn.setAttribute("aria-pressed", selected ? "true" : "false");
+      btn.addEventListener("click", function () {
+        if (selected) {
+          state.categories = state.categories.filter(function (x) { return x !== cat; });
+        } else {
+          state.categories = state.categories.concat([cat]);
+        }
+        renderAll();
+      });
+      el.appendChild(btn);
+    });
+  }
+
+  function renderStockFilterArea() {
+    var el = document.getElementById("stockFilterArea");
+    el.innerHTML = "";
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "stock-filter-btn";
+    btn.innerHTML = '<span>篩選個股</span><span class="chevron"></span>';
+    btn.addEventListener("click", function () { openSheet("stocksOnly"); });
+    el.appendChild(btn);
+
+    state.stocks.forEach(function (s) {
+      var pill = document.createElement("button");
+      pill.type = "button";
+      pill.className = "selected-stock-pill";
+      pill.innerHTML = '<span>' + s + '</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>';
+      pill.setAttribute("aria-label", "移除 " + s);
+      pill.addEventListener("click", function () {
+        state.stocks = state.stocks.filter(function (x) { return x !== s; });
+        renderAll();
+      });
+      el.appendChild(pill);
+    });
+  }
+
+
+  function renderHead() {
+    var row = document.getElementById("tableHead");
+    row.innerHTML = "";
+    COLUMNS.forEach(function (col) {
+      var th = document.createElement("th");
+      th.className = col.align === "right" ? "num" : "";
+      if (!col.sortable) {
+        th.textContent = col.label;
+        row.appendChild(th);
+        return;
+      }
+      var btn = document.createElement("button");
+      btn.className = "sort";
+      btn.type = "button";
+
+      var span = document.createElement("span");
+      span.textContent = col.label;
+
+      var icon = document.createElement("span");
+      var active = state.sortKey === col.key;
+      icon.className = "sort-icon" + (active ? (" " + state.sortDir) : "");
+      icon.innerHTML = '<span class="up"></span><span class="down"></span>';
+
+      if (col.align === "right") {
+        btn.appendChild(icon);
+        btn.appendChild(span);
+      } else {
+        btn.appendChild(span);
+        btn.appendChild(icon);
+      }
+
+      btn.addEventListener("click", function () {
+        if (state.sortKey === col.key) {
+          state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+        } else {
+          state.sortKey = col.key;
+          state.sortDir = "desc";
+        }
+        renderAll();
+      });
+
+      th.appendChild(btn);
+      row.appendChild(th);
+    });
+  }
+
+  function renderBody(rows) {
+    var body = document.getElementById("tableBody");
+    var empty = document.getElementById("emptyState");
+    body.innerHTML = "";
+
+    if (rows.length === 0) {
+      empty.style.display = "block";
+      return;
+    }
+    empty.style.display = "none";
+
+    rows.forEach(function (r) {
+      var d = new Date(r.date + "T00:00:00");
+      var tr = document.createElement("tr");
+
+      var tdDate = document.createElement("td");
+      tdDate.className = "date-cell";
+      tdDate.innerHTML = '<span class="d">' + pad(d.getMonth() + 1) + "/" + pad(d.getDate()) + '</span><span class="y">' + d.getFullYear() + "</span>";
+      tr.appendChild(tdDate);
+
+      var tdAction = document.createElement("td");
+      tdAction.className = r.action.indexOf("買") !== -1 ? "action-buy" : "action-sell";
+      tdAction.textContent = r.action;
+      tr.appendChild(tdAction);
+
+      var tdStock = document.createElement("td");
+      tdStock.className = "stock-cell";
+      tdStock.textContent = r.stock;
+      tr.appendChild(tdStock);
+
+      var tdPrice = document.createElement("td");
+      tdPrice.className = "num";
+      tdPrice.textContent = fmtPrice(r.price);
+      tr.appendChild(tdPrice);
+
+      var tdShares = document.createElement("td");
+      tdShares.className = "num";
+      tdShares.textContent = fmtInt(r.shares);
+      tr.appendChild(tdShares);
+
+      var tdRealized = document.createElement("td");
+      tdRealized.className = "num " + (r.realized === null ? "pnl-flat" : pnlClass(r.realized));
+      tdRealized.textContent = r.realized === null ? "—" : fmtSigned(r.realized);
+      tr.appendChild(tdRealized);
+
+      var tdPct = document.createElement("td");
+      tdPct.className = "num " + (r.realizedPct === null ? "pnl-flat" : pnlClass(r.realizedPct));
+      tdPct.textContent = r.realizedPct === null ? "—" : fmtPct(r.realizedPct);
+      tr.appendChild(tdPct);
+
+      body.appendChild(tr);
+    });
+  }
+
+  function renderSummary(rows) {
+    var total = rows.reduce(function (sum, r) { return sum + (r.realized || 0); }, 0);
+    var valueEl = document.getElementById("summaryValue");
+    valueEl.textContent = fmtSigned(total);
+    valueEl.className = "value " + pnlClass(total);
+
+    var b = getBounds();
+    document.getElementById("summaryRange").textContent = "(" + fmtSlash(b.start) + " - " + fmtSlash(b.end) + ")";
+  }
+
+  function renderTuneButton() {
+    var count = state.categories.length + state.stocks.length;
+    var badge = document.getElementById("tuneBadge");
+    badge.hidden = count === 0;
+    badge.textContent = count;
+  }
+
+  function renderCustomDateSummary() {
+    var el = document.getElementById("customDateSummary");
+    var isCustom = state.range === "custom";
+    el.classList.toggle("is-visible", isCustom);
+    if (isCustom) {
+      document.getElementById("customSummaryStart").textContent = fmtSlash(new Date(state.customStart + "T00:00:00"));
+      document.getElementById("customSummaryEnd").textContent = fmtSlash(new Date(state.customEnd + "T00:00:00"));
+    }
+  }
+
+  function renderAll() {
+    renderSegment();
+    renderCustomDateSummary();
+    renderCategoryChips();
+    renderStockFilterArea();
+    renderTuneButton();
+    renderHead();
+
+    var filtered = getFiltered().map(withPct);
+    var sorted = sortRows(filtered);
+    renderBody(sorted);
+    renderSummary(filtered);
+  }
+
+  document.getElementById("customDateSummary").addEventListener("click", function () { openDateSheet(); });
+
+  document.getElementById("backBtn").addEventListener("click", function () {
+    var btn = this;
+    btn.style.transform = "scale(0.9)";
+    setTimeout(function () { btn.style.transform = ""; }, 120);
+  });
+
+  var SHEET_CATEGORIES = ["現股", "融資", "融券"];
+
+  function renderSheetCategoryChips() {
+    var el = document.getElementById("sheetCategoryChips");
+    el.innerHTML = "";
+
+    var allBtn = document.createElement("button");
+    allBtn.type = "button";
+    allBtn.className = "chip";
+    allBtn.textContent = "全部";
+    allBtn.setAttribute("aria-pressed", sheetState.categories.length === 0 ? "true" : "false");
+    allBtn.addEventListener("click", function () {
+      sheetState.categories = [];
+      renderSheetCategoryChips();
+    });
+    el.appendChild(allBtn);
+
+    var div = document.createElement("span");
+    div.className = "sheet-divider";
+    el.appendChild(div);
+
+    SHEET_CATEGORIES.forEach(function (cat) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip";
+      btn.textContent = cat;
+      var selected = sheetState.categories.indexOf(cat) !== -1;
+      btn.setAttribute("aria-pressed", selected ? "true" : "false");
+      btn.addEventListener("click", function () {
+        if (selected) {
+          sheetState.categories = sheetState.categories.filter(function (x) { return x !== cat; });
+        } else {
+          sheetState.categories = sheetState.categories.concat([cat]);
+        }
+        renderSheetCategoryChips();
+      });
+      el.appendChild(btn);
+    });
+  }
+
+  function makeStockChip(label, selected, onToggle) {
+    var chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "stock-chip" + (selected ? " is-selected" : "");
+    chip.textContent = label;
+    chip.addEventListener("click", onToggle);
+    return chip;
+  }
+
+  function renderSheetStockChips() {
+    var el = document.getElementById("sheetStockArea");
+    el.innerHTML = "";
+
+    var clearBtn = document.getElementById("sheetClear");
+    clearBtn.hidden = !(sheetState.searchActive || sheetState.query.length > 0);
+
+    if (!sheetState.searchActive) {
+      var grid = document.createElement("div");
+      grid.className = "stock-chip-grid";
+
+      grid.appendChild(makeStockChip("全部", sheetState.stocks.length === 0, function () {
+        sheetState.stocks = [];
+        renderSheetStockChips();
+      }));
+
+      var div = document.createElement("span");
+      div.className = "sheet-divider";
+      grid.appendChild(div);
+
+      STOCKS.forEach(function (s) {
+        var selected = sheetState.stocks.indexOf(s) !== -1;
+        grid.appendChild(makeStockChip(s, selected, function () {
+          if (selected) {
+            sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
+          } else {
+            sheetState.stocks = sheetState.stocks.concat([s]);
+          }
+          renderSheetStockChips();
+        }));
+      });
+
+      el.appendChild(grid);
+      return;
+    }
+
+    var q = sheetState.query.trim();
+
+    if (q === "") {
+      el.innerHTML =
+        '<div class="sheet-empty"><div class="sheet-empty-icon">' + EMPTY_ICON + '</div><p>請輸入關鍵字</p></div>';
+      return;
+    }
+
+    var candidates = STOCKS.filter(function (s) { return s.indexOf(q) !== -1; });
+
+    if (candidates.length === 0) {
+      el.innerHTML =
+        '<div class="sheet-empty"><div class="sheet-empty-icon">' + EMPTY_ICON + '</div><p>找不到符合「' + q + '」的個股</p></div>';
+      return;
+    }
+
+    var resultGrid = document.createElement("div");
+    resultGrid.className = "stock-chip-grid";
+    candidates.forEach(function (s) {
+      var selected = sheetState.stocks.indexOf(s) !== -1;
+      resultGrid.appendChild(makeStockChip(s, selected, function () {
+        if (selected) {
+          sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
+        } else {
+          sheetState.stocks = sheetState.stocks.concat([s]);
+        }
+        renderSheetStockChips();
+      }));
+    });
+    el.appendChild(resultGrid);
+  }
+
+  function openSheet(mode) {
+    sheetState.open = true;
+    sheetState.mode = mode || "full";
+    sheetState.categories = state.categories.slice();
+    sheetState.stocks = state.stocks.slice();
+    sheetState.query = "";
+    sheetState.searchActive = false;
+    document.getElementById("sheetSearch").value = "";
+
+    var isFull = sheetState.mode === "full";
+    document.getElementById("sheetTitle").textContent = isFull ? "篩選紀錄" : "篩選個股";
+    document.getElementById("sheetCategorySection").style.display = isFull ? "" : "none";
+    document.getElementById("sheetStockLabel").style.display = isFull ? "" : "none";
+
+    renderSheetCategoryChips();
+    renderSheetStockChips();
+    document.getElementById("sheetOverlay").classList.add("is-open");
+  }
+
+  function closeSheet() {
+    sheetState.open = false;
+    document.getElementById("sheetOverlay").classList.remove("is-open");
+  }
+
+  document.getElementById("tuneBtn").addEventListener("click", function () { openSheet("full"); });
+
+  document.getElementById("sheetOverlay").addEventListener("click", function (e) {
+    if (e.target === this) closeSheet();
+  });
+  document.getElementById("sheetClose").addEventListener("click", closeSheet);
+
+  document.getElementById("sheetReset").addEventListener("click", function () {
+    if (sheetState.mode === "full") {
+      sheetState.categories = [];
+    }
+    sheetState.stocks = [];
+    sheetState.query = "";
+    sheetState.searchActive = false;
+    document.getElementById("sheetSearch").value = "";
+    renderSheetCategoryChips();
+    renderSheetStockChips();
+  });
+
+  document.getElementById("sheetSearch").addEventListener("focus", function () {
+    sheetState.searchActive = true;
+    renderSheetStockChips();
+  });
+
+  document.getElementById("sheetSearch").addEventListener("input", function (e) {
+    sheetState.query = e.target.value;
+    renderSheetStockChips();
+  });
+
+  document.getElementById("sheetClear").addEventListener("click", function () {
+    sheetState.query = "";
+    sheetState.searchActive = false;
+    document.getElementById("sheetSearch").value = "";
+    document.getElementById("sheetSearch").blur();
+    renderSheetStockChips();
+  });
+
+  document.getElementById("sheetApply").addEventListener("click", function () {
+    if (sheetState.mode === "full") {
+      state.categories = sheetState.categories.slice();
+    }
+    state.stocks = sheetState.stocks.slice();
+    closeSheet();
+    renderAll();
+  });
+
+  var DATE_PRESETS = [
+    { key: "day", label: "當日", days: 0 },
+    { key: "30d", label: "30 天", days: 30 },
+    { key: "60d", label: "60 天", days: 60 },
+    { key: "90d", label: "90 天", days: 90 },
+    { key: "custom", label: "自訂", days: null }
+  ];
+
+  var dateSheetState = {
+    open: false,
+    preset: "custom",
+    start: null,
+    end: null,
+    viewYear: NOW.getFullYear(),
+    viewMonth: NOW.getMonth()
+  };
+
+  function sameDay(a, b) {
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+
+  function renderDatePresets() {
+    var el = document.getElementById("datePresetRow");
+    el.innerHTML = "";
+    DATE_PRESETS.forEach(function (p) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "date-preset-chip";
+      btn.textContent = p.label;
+      btn.setAttribute("aria-pressed", dateSheetState.preset === p.key ? "true" : "false");
+      btn.addEventListener("click", function () {
+        dateSheetState.preset = p.key;
+        if (p.days !== null) {
+          var end = new Date(NOW);
+          var start = subDays(NOW, p.days);
+          dateSheetState.start = start;
+          dateSheetState.end = end;
+          dateSheetState.viewYear = end.getFullYear();
+          dateSheetState.viewMonth = end.getMonth();
+        }
+        renderDatePresets();
+        renderDateSummary();
+        renderCalendar();
+      });
+      el.appendChild(btn);
+    });
+  }
+
+  function renderDateSummary() {
+    document.getElementById("dateStartValue").textContent = dateSheetState.start ? fmtSlash(dateSheetState.start) : "-";
+    document.getElementById("dateEndValue").textContent = dateSheetState.end ? fmtSlash(dateSheetState.end) : "-";
+    document.getElementById("dateConfirm").disabled = !(dateSheetState.start && dateSheetState.end);
+  }
+
+  function pickDate(d) {
+    dateSheetState.preset = "custom";
+    if (!dateSheetState.start || (dateSheetState.start && dateSheetState.end)) {
+      dateSheetState.start = d;
+      dateSheetState.end = null;
+    } else if (d < dateSheetState.start) {
+      dateSheetState.start = d;
+      dateSheetState.end = null;
+    } else {
+      var diffDays = Math.round((d - dateSheetState.start) / 86400000);
+      if (diffDays > 365) {
+        dateSheetState.start = d;
+        dateSheetState.end = null;
+      } else {
+        dateSheetState.end = d;
+      }
+    }
+    renderDatePresets();
+    renderDateSummary();
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    document.getElementById("dateNavLabel").textContent =
+      pad(dateSheetState.viewMonth + 1) + " 月  " + dateSheetState.viewYear + " 年";
+
+    var isAtCurrentMonth =
+      dateSheetState.viewYear > NOW.getFullYear() ||
+      (dateSheetState.viewYear === NOW.getFullYear() && dateSheetState.viewMonth >= NOW.getMonth());
+    document.getElementById("dateNavNext").disabled = isAtCurrentMonth;
+
+    var firstOfMonth = new Date(dateSheetState.viewYear, dateSheetState.viewMonth, 1);
+    var startWeekday = firstOfMonth.getDay();
+    var daysInMonth = new Date(dateSheetState.viewYear, dateSheetState.viewMonth + 1, 0).getDate();
+    var daysInPrevMonth = new Date(dateSheetState.viewYear, dateSheetState.viewMonth, 0).getDate();
+
+    var cells = [];
+    for (var i = 0; i < startWeekday; i++) {
+      cells.push({ day: daysInPrevMonth - startWeekday + 1 + i, outside: true });
+    }
+    for (var d = 1; d <= daysInMonth; d++) {
+      cells.push({ day: d, outside: false, date: new Date(dateSheetState.viewYear, dateSheetState.viewMonth, d) });
+    }
+    var remainder = cells.length % 7;
+    if (remainder !== 0) {
+      var need = 7 - remainder;
+      for (var j = 1; j <= need; j++) cells.push({ day: j, outside: true });
+    }
+
+    var grid = document.getElementById("calendarGrid");
+    grid.innerHTML = "";
+    var today = new Date(NOW.getFullYear(), NOW.getMonth(), NOW.getDate());
+
+    cells.forEach(function (c) {
+      var cellWrap = document.createElement("div");
+      cellWrap.className = "calendar-day-cell";
+
+      if (c.outside) {
+        var outsideEl = document.createElement("div");
+        outsideEl.className = "calendar-day is-outside";
+        outsideEl.textContent = c.day;
+        cellWrap.appendChild(outsideEl);
+        grid.appendChild(cellWrap);
+        return;
+      }
+
+      var cd = c.date;
+      var isToday = sameDay(cd, today);
+      var isStart = dateSheetState.start && sameDay(cd, dateSheetState.start);
+      var isEnd = dateSheetState.end && sameDay(cd, dateSheetState.end);
+      var inRange = dateSheetState.start && dateSheetState.end && cd > dateSheetState.start && cd < dateSheetState.end;
+      var isFuture = cd > today;
+
+      if (inRange || isStart || isEnd) {
+        cellWrap.classList.add("is-in-range");
+        if (isStart) cellWrap.classList.add("is-range-start");
+        if (isEnd) cellWrap.classList.add("is-range-end");
+      }
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "calendar-day";
+      if (isToday) btn.classList.add("is-today");
+      if (isStart || isEnd) btn.classList.add("is-endpoint");
+      if (isFuture) {
+        btn.classList.add("is-outside");
+        btn.disabled = true;
+      }
+      btn.textContent = c.day;
+      btn.addEventListener("click", function () { pickDate(cd); });
+      cellWrap.appendChild(btn);
+      grid.appendChild(cellWrap);
+    });
+  }
+
+  function openDateSheet() {
+    dateSheetState.open = true;
+    if (state.range === "custom" && state.customStart && state.customEnd) {
+      dateSheetState.start = new Date(state.customStart + "T00:00:00");
+      dateSheetState.end = new Date(state.customEnd + "T00:00:00");
+    } else {
+      dateSheetState.start = null;
+      dateSheetState.end = null;
+    }
+    dateSheetState.preset = "custom";
+    var viewBase = dateSheetState.end || NOW;
+    dateSheetState.viewYear = viewBase.getFullYear();
+    dateSheetState.viewMonth = viewBase.getMonth();
+
+    renderDatePresets();
+    renderDateSummary();
+    renderCalendar();
+    document.getElementById("dateSheetOverlay").classList.add("is-open");
+  }
+
+  function closeDateSheet() {
+    dateSheetState.open = false;
+    document.getElementById("dateSheetOverlay").classList.remove("is-open");
+  }
+
+  document.getElementById("dateNavPrev").addEventListener("click", function () {
+    dateSheetState.viewMonth -= 1;
+    if (dateSheetState.viewMonth < 0) {
+      dateSheetState.viewMonth = 11;
+      dateSheetState.viewYear -= 1;
+    }
+    renderCalendar();
+  });
+
+  document.getElementById("dateNavNext").addEventListener("click", function () {
+    dateSheetState.viewMonth += 1;
+    if (dateSheetState.viewMonth > 11) {
+      dateSheetState.viewMonth = 0;
+      dateSheetState.viewYear += 1;
+    }
+    renderCalendar();
+  });
+
+  document.getElementById("dateConfirm").addEventListener("click", function () {
+    if (!dateSheetState.start || !dateSheetState.end) return;
+    state.range = "custom";
+    state.customStart = toISO(dateSheetState.start);
+    state.customEnd = toISO(dateSheetState.end);
+    closeDateSheet();
+    renderAll();
+  });
+
+  document.getElementById("dateCancel").addEventListener("click", closeDateSheet);
+
+  document.getElementById("dateSheetOverlay").addEventListener("click", function (e) {
+    if (e.target === this) closeDateSheet();
+  });
+
+  renderAll();
+})();
+</script>
