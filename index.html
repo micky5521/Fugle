@@ -7,64 +7,237 @@
 <style>
   :root {
     color-scheme: light dark;
-    --ink: #222;
-    --ink-muted: #6b6b6b;
-    --border: #e5e5e5;
-    --surface: #fff;
-    --bg: #f7f6f4;
+    --ink: #232221;
+    --ink-muted: #7a7772;
+    --ink-faint: #b7b3ac;
+    --border: #e8e4dd;
+    --surface: #ffffff;
+    --surface-hover: #fff8f3;
+    --bg-1: #f6f3ee;
+    --bg-2: #efe9df;
     --accent: #fa5a00;
+    --accent-soft: #fff1e6;
+    --shadow: rgba(60, 45, 20, 0.08);
   }
+
   @media (prefers-color-scheme: dark) {
     :root {
-      --ink: #f0f0f0;
-      --ink-muted: #9a9a9a;
-      --border: #333;
-      --surface: #1c1c1e;
-      --bg: #111;
+      --ink: #f1efec;
+      --ink-muted: #a5a19a;
+      --ink-faint: #57534c;
+      --border: #34312c;
+      --surface: #1d1c1a;
+      --surface-hover: #262320;
+      --bg-1: #14130f;
+      --bg-2: #1a1815;
+      --accent: #ff7a35;
+      --accent-soft: rgba(255, 122, 53, 0.14);
+      --shadow: rgba(0, 0, 0, 0.4);
     }
   }
+
   * { box-sizing: border-box; }
+
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", sans-serif;
-    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
     color: var(--ink);
-    padding: 48px 20px;
+    background:
+      radial-gradient(circle at 12% 0%, var(--bg-2), transparent 55%),
+      radial-gradient(circle at 90% 100%, var(--bg-2), transparent 50%),
+      var(--bg-1);
+    min-height: 100vh;
+    padding: 64px 24px 80px;
   }
-  main { max-width: 640px; margin: 0 auto; }
-  h1 { font-size: 20px; margin: 0 0 4px; }
-  p.sub { color: var(--ink-muted); margin: 0 0 28px; font-size: 14px; }
-  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  li {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+
+  main { max-width: 760px; margin: 0 auto; }
+
+  header {
+    margin-bottom: 48px;
   }
-  li a {
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 46ch;
+  }
+
+  section { margin-bottom: 44px; }
+  section:last-child { margin-bottom: 0; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-head h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .section-head .count {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .card-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px var(--shadow);
+    transition: border-color 0.15s, background-color 0.15s, transform 0.15s;
+  }
+
+  .card-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
     text-decoration: none;
     color: inherit;
   }
-  li a:hover { border-color: var(--accent); }
-  .name { font-weight: 600; font-size: 15px; }
-  .path { font-size: 12.5px; color: var(--ink-muted); font-family: ui-monospace, monospace; }
+
+  .card-list li:hover {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+  }
+
+  .card-list li:hover .go { transform: translateX(2px); opacity: 1; }
+
+  .card-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+  .card-name {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .card-path {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .go {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 14px;
+    opacity: 0.6;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+
+  .empty-state {
+    border: 1.5px dashed var(--border);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .empty-state .icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <h1>Fugle Prototypes</h1>
-  <p class="sub">互動原型索引 — 新增原型時請把連結加進下面清單</p>
-  <ul>
-    <li>
-      <a href="./Just invest/JI app interactive demo.html">
-        <span class="name">JI app interactive demo</span>
-        <span class="path">Just invest/JI app interactive demo.html</span>
-      </a>
-    </li>
-  </ul>
+  <header>
+    <p class="eyebrow">Fugle · Prototype Index</p>
+    <h1>Interactive Prototypes</h1>
+    <p>依產品線分類的互動原型清單，點進去可以直接在瀏覽器操作。新增原型時把連結加進對應區塊即可。</p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>吉盈 App</h2>
+      <span class="count">1 個原型</span>
+    </div>
+    <ul class="card-list">
+      <li>
+        <a href="./Just invest/JI app interactive demo.html">
+          <span class="card-text">
+            <span class="card-name">JI app interactive demo</span>
+            <span class="card-path">Just invest/JI app interactive demo.html</span>
+          </span>
+          <span class="go">查看 →</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>富果 IA</h2>
+      <span class="count">0 個原型</span>
+    </div>
+    <div class="empty-state">
+      <div class="icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      尚無原型 — 新增後會顯示在這裡
+    </div>
+  </section>
+
+  <footer>Fugle / micky5521 — 內部原型索引，非正式產品頁面</footer>
 </main>
 </body>
 </html>
