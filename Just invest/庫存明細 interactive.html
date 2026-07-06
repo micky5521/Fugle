@@ -322,15 +322,9 @@
     background: var(--surface-variant);
     display: flex;
     align-items: stretch;
-    margin-right: -20px;
+    margin: 0 -20px;
     min-width: 0;
     overflow: hidden;
-  }
-
-  .holdings-lead {
-    flex-shrink: 0;
-    width: 20px;
-    background: var(--surface-variant);
   }
 
   .holdings-scroll {
@@ -369,7 +363,7 @@
     box-sizing: border-box;
   }
 
-  .holdings thead th.first { text-align: left; padding-left: 12px; padding-right: 6px; }
+  .holdings thead th.first { text-align: left; padding-left: 32px; padding-right: 6px; }
 
   .holdings th button.sort {
     display: inline-flex;
@@ -422,7 +416,7 @@
 
   .holdings tbody td.date-cell {
     text-align: left;
-    padding-left: 12px;
+    padding-left: 32px;
     font-variant-numeric: normal;
   }
 
@@ -554,7 +548,6 @@
         <div class="holdings-section">
           <p class="section-label">交易明細</p>
           <div class="holdings-wrap">
-            <div class="holdings-lead" aria-hidden="true"></div>
             <div class="holdings-scroll">
               <table class="holdings">
                 <thead><tr id="holdingsHead"></tr></thead>
