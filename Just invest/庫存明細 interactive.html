@@ -319,13 +319,18 @@
   .holdings-section { min-width: 0; }
 
   .holdings-wrap {
-    background: var(--surface);
-    border-radius: 8px 0 0 8px;
+    background: var(--surface-variant);
     display: flex;
     align-items: stretch;
     margin-right: -20px;
     min-width: 0;
     overflow: hidden;
+  }
+
+  .holdings-lead {
+    flex-shrink: 0;
+    width: 20px;
+    background: var(--surface-variant);
   }
 
   .holdings-scroll {
@@ -547,6 +552,7 @@
         <div class="holdings-section">
           <p class="section-label">交易明細</p>
           <div class="holdings-wrap">
+            <div class="holdings-lead" aria-hidden="true"></div>
             <div class="holdings-scroll">
               <table class="holdings">
                 <thead><tr id="holdingsHead"></tr></thead>
