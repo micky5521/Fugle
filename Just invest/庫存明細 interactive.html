@@ -1,0 +1,742 @@
+<title>庫存明細 · 互動原型</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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" />
+<style>
+  :root {
+    --backdrop-1: #efece6;
+    --backdrop-2: #e5ded3;
+    --bezel: #1b1a18;
+    --bezel-edge: #35322d;
+    --surface: #ffffff;
+    --surface-variant: #f5f5f5;
+    --border: #eaeaea;
+    --border-heavy: #dfdfdf;
+    --ink: #323232;
+    --ink-muted: #8b8a8a;
+    --ink-faint: #c3c1bd;
+    --accent: #fa5a00;
+    --accent-soft: #fff5f0;
+    --accent-ink: #ffffff;
+    --gain: #e83c3c;
+    --loss: #339c09;
+    --shadow: rgba(35, 26, 15, 0.22);
+    --caption-ink: #6b675f;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --backdrop-1: #111013;
+      --backdrop-2: #1a181c;
+      --bezel: #050505;
+      --bezel-edge: #232226;
+      --surface: #1c1c1e;
+      --surface-variant: #0f0f10;
+      --border: #333338;
+      --border-heavy: #424248;
+      --ink: #f1efec;
+      --ink-muted: #9c9a9e;
+      --ink-faint: #45444a;
+      --accent: #ff7a35;
+      --accent-soft: rgba(255, 122, 53, 0.16);
+      --accent-ink: #1c1c1e;
+      --gain: #ff6a6a;
+      --loss: #43c62c;
+      --shadow: rgba(0, 0, 0, 0.55);
+      --caption-ink: #b9b6b0;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --backdrop-1: #111013;
+    --backdrop-2: #1a181c;
+    --bezel: #050505;
+    --bezel-edge: #232226;
+    --surface: #1c1c1e;
+    --surface-variant: #0f0f10;
+    --border: #333338;
+    --border-heavy: #424248;
+    --ink: #f1efec;
+    --ink-muted: #9c9a9e;
+    --ink-faint: #45444a;
+    --accent: #ff7a35;
+    --accent-soft: rgba(255, 122, 53, 0.16);
+    --accent-ink: #1c1c1e;
+    --gain: #ff6a6a;
+    --loss: #43c62c;
+    --shadow: rgba(0, 0, 0, 0.55);
+    --caption-ink: #b9b6b0;
+  }
+
+  :root[data-theme="light"] {
+    --backdrop-1: #efece6;
+    --backdrop-2: #e5ded3;
+    --bezel: #1b1a18;
+    --bezel-edge: #35322d;
+    --surface: #ffffff;
+    --surface-variant: #f5f5f5;
+    --border: #eaeaea;
+    --border-heavy: #dfdfdf;
+    --ink: #323232;
+    --ink-muted: #8b8a8a;
+    --ink-faint: #c3c1bd;
+    --accent: #fa5a00;
+    --accent-soft: #fff5f0;
+    --accent-ink: #ffffff;
+    --gain: #e83c3c;
+    --loss: #339c09;
+    --shadow: rgba(35, 26, 15, 0.22);
+    --caption-ink: #6b675f;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html, body { margin: 0; min-height: 100%; }
+
+  body {
+    font-family: "LINE Seed TW", "LINE Seed TW_TTF", -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 18% 12%, var(--backdrop-2), transparent 55%),
+      radial-gradient(circle at 84% 88%, var(--backdrop-2), transparent 50%),
+      var(--backdrop-1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 22px;
+    padding: 48px 20px 64px;
+  }
+
+  .studio-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .studio-tag .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .studio-tag h1 { margin: 0; font-size: 19px; font-weight: 700; color: var(--ink); }
+
+  .studio-tag p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--caption-ink);
+    max-width: 320px;
+    line-height: 1.5;
+  }
+
+  .device {
+    background: linear-gradient(160deg, var(--bezel-edge), var(--bezel) 60%);
+    border-radius: 52px;
+    padding: 14px;
+    box-shadow: 0 30px 60px -20px var(--shadow), 0 2px 10px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  .screen {
+    width: 402px;
+    height: 852px;
+    background: var(--surface-variant);
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .dynamic-island {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 108px;
+    height: 28px;
+    background: var(--bezel);
+    border-radius: 16px;
+    z-index: 20;
+  }
+
+  .chrome {
+    flex-shrink: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 26px 8px;
+  }
+
+  .status-bar .time {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-icons { display: flex; align-items: center; gap: 6px; color: var(--ink); }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 4px;
+    position: relative;
+  }
+
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .icon-btn:hover { background: var(--surface-variant); }
+
+  .header-row h2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .scroll-area { flex: 1; overflow-y: auto; overflow-x: hidden; }
+
+  .brief-card {
+    background: var(--surface);
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+
+  .update-time {
+    position: absolute;
+    top: 10px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--ink-muted);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .refresh-btn {
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .refresh-btn:hover { color: var(--accent); }
+
+  .refresh-btn.is-spinning svg { animation: spin 0.6s linear; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .stock-title { font-size: 16px; font-weight: 700; color: var(--ink); }
+
+  .stat-row { display: flex; gap: 10px; }
+
+  .stat-item { flex: 1; display: flex; flex-direction: column; gap: 0; min-width: 0; }
+  .stat-item .label { font-size: 14px; color: var(--ink); line-height: 1.5; }
+  .stat-item .value { font-size: 16px; font-weight: 700; line-height: 1.5; font-variant-numeric: tabular-nums; }
+
+  .page-body { padding: 20px; display: flex; flex-direction: column; gap: 24px; }
+
+  .detail-card {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+  }
+
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row .value { font-variant-numeric: tabular-nums; }
+
+  .section-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    padding: 0 8px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .holdings-wrap {
+    background: var(--surface);
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .holdings-scroll {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .holdings-scroll::-webkit-scrollbar { height: 6px; }
+  .holdings-scroll::-webkit-scrollbar-thumb { background: var(--border-heavy); border-radius: 3px; }
+
+  .holdings-fixed {
+    flex-shrink: 0;
+    width: 40px;
+    box-shadow: -6px 0 8px -4px var(--shadow);
+    position: relative;
+    z-index: 3;
+  }
+
+  table.holdings { border-collapse: collapse; width: max-content; }
+
+  .holdings thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-heavy);
+    z-index: 2;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    height: 36px;
+    padding: 0 4px;
+    white-space: nowrap;
+    text-align: right;
+    box-sizing: border-box;
+  }
+
+  .holdings thead th.first { text-align: left; padding-left: 12px; padding-right: 6px; }
+
+  .holdings th button.sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    flex-direction: row-reverse;
+    background: none;
+    border: none;
+    font: inherit;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .holdings th.first button.sort { flex-direction: row; }
+
+  .sort-icon {
+    display: inline-flex;
+    flex-direction: column;
+    width: 10px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+
+  .sort-icon span {
+    width: 0;
+    height: 0;
+    border-left: 3.5px solid transparent;
+    border-right: 3.5px solid transparent;
+  }
+
+  .sort-icon .up { border-bottom: 4px solid var(--ink-faint); margin-bottom: 1.5px; }
+  .sort-icon .down { border-top: 4px solid var(--ink-faint); }
+  .sort-icon.asc .up { border-bottom-color: var(--accent); }
+  .sort-icon.desc .down { border-top-color: var(--accent); }
+
+  .holdings tbody td {
+    height: 50px;
+    padding: 0 4px;
+    font-size: 16px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    box-sizing: border-box;
+  }
+
+  .holdings tbody td.date-cell {
+    text-align: left;
+    padding-left: 12px;
+    font-variant-numeric: normal;
+  }
+
+  .date-cell .d { font-size: 14px; color: var(--ink); }
+  .date-cell .y { font-size: 12px; color: var(--ink-muted); display: block; line-height: 1.3; }
+
+  .pnl-gain { color: var(--gain); }
+  .pnl-loss { color: var(--loss); }
+  .pnl-flat { color: var(--ink-muted); }
+
+  table.holdings-fixed-table { border-collapse: collapse; width: 100%; }
+
+  .holdings-fixed-table th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-heavy);
+    height: 36px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--ink);
+    line-height: 1.2;
+    text-align: right;
+  }
+
+  .holdings-fixed-table td {
+    height: 50px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+  }
+
+  .modify-btn {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .modify-btn:hover { color: var(--accent); }
+
+  .foot-note {
+    max-width: 340px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--caption-ink);
+  }
+
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .scroll-area::-webkit-scrollbar { width: 6px; }
+  .scroll-area::-webkit-scrollbar-thumb { background: var(--border-heavy); border-radius: 3px; }
+</style>
+
+<div class="studio-tag">
+  <span class="eyebrow">互動原型 · Prototype</span>
+  <h1>庫存明細</h1>
+  <p>依 Figma 設計稿還原，交易明細表格可橫向捲動、欄位可排序 — 「修改成本價」欄位固定在右側 — 資料為模擬產生，非真實庫存。</p>
+</div>
+
+<div class="device">
+  <div class="screen">
+    <div class="dynamic-island"></div>
+    <div class="chrome">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <span class="status-icons">
+          <svg width="19" height="12" viewBox="0 0 19 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="0.6" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="0.6" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="0.6" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="0.6" fill="currentColor"/></svg>
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M8.5 10.6a1.3 1.3 0 100-2.6 1.3 1.3 0 000 2.6z" fill="currentColor"/><path d="M4.9 6.9a5.1 5.1 0 017.2 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M2 4a9 9 0 0113 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x="0.75" y="0.75" width="21.5" height="11.5" rx="3" stroke="currentColor" stroke-width="1.1"/><rect x="2.3" y="2.3" width="18.4" height="8.4" rx="1.6" fill="currentColor"/><rect x="23" y="4" width="2" height="5" rx="1" fill="currentColor"/></svg>
+        </span>
+      </div>
+      <div class="header-row">
+        <button class="icon-btn" type="button" aria-label="返回" id="backBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2>庫存明細</h2>
+      </div>
+    </div>
+
+    <div class="scroll-area">
+      <div class="brief-card">
+        <div class="update-time">
+          <span id="updateTime">9:10:01</span>
+          <span>更新</span>
+          <button class="refresh-btn" type="button" id="refreshBtn" aria-label="重新整理">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 11A8 8 0 104 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 5v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="stock-title">0056 元大高股息 現股</div>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="label">未實現損益</span>
+            <span class="value pnl-gain" id="statPnl">14,007</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">未實現損益率</span>
+            <span class="value pnl-gain" id="statPnlPct">253.66%</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">庫存股</span>
+            <span class="value" id="statShares">380</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="detail-card">
+          <div class="detail-row"><span>成交均價</span><span class="value">14.53</span></div>
+          <div class="detail-row"><span>損益平衡價</span><span class="value">14.60</span></div>
+          <div class="detail-row"><span>現價</span><span class="value">51.5</span></div>
+          <div class="detail-row"><span>持有成本</span><span class="value">5,522</span></div>
+          <div class="detail-row"><span>市值</span><span class="value">19,568</span></div>
+        </div>
+
+        <div>
+          <p class="section-label">交易明細</p>
+          <div class="holdings-wrap">
+            <div class="holdings-scroll">
+              <table class="holdings">
+                <thead><tr id="holdingsHead"></tr></thead>
+                <tbody id="holdingsBody"></tbody>
+              </table>
+            </div>
+            <div class="holdings-fixed">
+              <table class="holdings-fixed-table">
+                <thead><tr><th><span style="display:block;">修改</span><span style="display:block;">成本價</span></th></tr></thead>
+                <tbody id="holdingsFixedBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="foot-note">點選「交易明細」欄位標題可即時排序；下方表格可左右滑動查看更多欄位，「修改成本價」固定顯示在右側不隨捲動移動。</p>
+
+<script>
+(function () {
+  "use strict";
+
+  var RAW = [
+    ["2026-04-27", 39, 35.30, 631, 45.82, 35.68, 2012, 0, 0, "1694A"],
+    ["2026-04-25", 39, 35.30, 631, 45.82, 35.68, 2012, 0, 0, "1694B"],
+    ["2026-04-23", 39, 35.30, -220, -12.35, 35.68, 1990, 0, 0, "1683C"],
+    ["2026-04-10", 39, 35.30, 631, 45.82, 35.68, 2012, 0, 0, "1662A"],
+    ["2026-03-28", 42, 34.10, 480, 33.20, 34.55, 1912, 0, 0, "1601D"],
+    ["2026-03-14", 42, 34.10, -95, -6.40, 34.55, 1832, 0, 0, "1544A"],
+    ["2026-02-26", 40, 32.80, 356, 27.10, 33.20, 1720, 0, 0, "1498B"],
+    ["2026-02-11", 40, 32.80, 356, 27.10, 33.20, 1720, 0, 0, "1451A"],
+    ["2026-01-22", 38, 31.50, -140, -11.60, 32.00, 1596, 0, 0, "1402C"],
+    ["2026-01-08", 38, 31.50, 289, 24.05, 32.00, 1596, 0, 0, "1360A"],
+    ["2025-12-19", 36, 30.20, 210, 19.30, 30.70, 1447, 0, 0, "1305B"],
+    ["2025-12-02", 36, 30.20, 210, 19.30, 30.70, 1447, 0, 0, "1268A"]
+  ].map(function (r) {
+    return {
+      date: r[0], shares: r[1], price: r[2], unrealized: r[3], profitRate: r[4],
+      breakeven: r[5], marketValue: r[6], fee: r[7], tax: r[8], orderNo: r[9]
+    };
+  });
+
+  var COLUMNS = [
+    { key: "date", label: "成交日", first: true },
+    { key: "shares", label: "股數" },
+    { key: "price", label: "成交價" },
+    { key: "unrealized", label: "未實現", pnl: true },
+    { key: "profitRate", label: "獲利率", pnl: true },
+    { key: "breakeven", label: "損益平衡價" },
+    { key: "marketValue", label: "市值" },
+    { key: "fee", label: "手續費" },
+    { key: "tax", label: "交易稅" },
+    { key: "orderNo", label: "委托書號" }
+  ];
+
+  var state = { sortKey: "date", sortDir: "desc" };
+
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+  function fmtInt(n) { return Math.round(n).toLocaleString("en-US"); }
+  function fmtPnl(n) { return Math.round(Math.abs(n)).toLocaleString("en-US"); }
+  function fmtPct(n) { return Math.abs(n).toFixed(2) + "%"; }
+  function pnlClass(n) { return n > 0 ? "pnl-gain" : (n < 0 ? "pnl-loss" : "pnl-flat"); }
+
+  function sortRows() {
+    var key = state.sortKey, dir = state.sortDir;
+    return RAW.slice().sort(function (a, b) {
+      var av = a[key], bv = b[key];
+      if (av < bv) return dir === "asc" ? -1 : 1;
+      if (av > bv) return dir === "asc" ? 1 : -1;
+      return 0;
+    });
+  }
+
+  function renderHead() {
+    var row = document.getElementById("holdingsHead");
+    row.innerHTML = "";
+    COLUMNS.forEach(function (col) {
+      var th = document.createElement("th");
+      if (col.first) th.className = "first";
+
+      var btn = document.createElement("button");
+      btn.className = "sort";
+      btn.type = "button";
+
+      var span = document.createElement("span");
+      span.textContent = col.label;
+
+      var icon = document.createElement("span");
+      var active = state.sortKey === col.key;
+      icon.className = "sort-icon" + (active ? (" " + state.sortDir) : "");
+      icon.innerHTML = '<span class="up"></span><span class="down"></span>';
+
+      btn.appendChild(span);
+      btn.appendChild(icon);
+
+      btn.addEventListener("click", function () {
+        if (state.sortKey === col.key) {
+          state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+        } else {
+          state.sortKey = col.key;
+          state.sortDir = "desc";
+        }
+        renderAll();
+      });
+
+      th.appendChild(btn);
+      row.appendChild(th);
+    });
+  }
+
+  function renderBody(rows) {
+    var body = document.getElementById("holdingsBody");
+    var fixedBody = document.getElementById("holdingsFixedBody");
+    body.innerHTML = "";
+    fixedBody.innerHTML = "";
+
+    rows.forEach(function (r) {
+      var d = new Date(r.date + "T00:00:00");
+      var tr = document.createElement("tr");
+
+      var tdDate = document.createElement("td");
+      tdDate.className = "date-cell";
+      tdDate.innerHTML = '<span class="d">' + pad(d.getMonth() + 1) + "/" + pad(d.getDate()) + '</span><span class="y">' + d.getFullYear() + "</span>";
+      tr.appendChild(tdDate);
+
+      var tdShares = document.createElement("td");
+      tdShares.textContent = fmtInt(r.shares);
+      tr.appendChild(tdShares);
+
+      var tdPrice = document.createElement("td");
+      tdPrice.textContent = r.price.toFixed(2);
+      tr.appendChild(tdPrice);
+
+      var tdUnrealized = document.createElement("td");
+      tdUnrealized.className = pnlClass(r.unrealized);
+      tdUnrealized.textContent = fmtPnl(r.unrealized);
+      tr.appendChild(tdUnrealized);
+
+      var tdRate = document.createElement("td");
+      tdRate.className = pnlClass(r.profitRate);
+      tdRate.textContent = fmtPct(r.profitRate);
+      tr.appendChild(tdRate);
+
+      var tdBreakeven = document.createElement("td");
+      tdBreakeven.textContent = r.breakeven.toFixed(2);
+      tr.appendChild(tdBreakeven);
+
+      var tdMarket = document.createElement("td");
+      tdMarket.textContent = fmtInt(r.marketValue);
+      tr.appendChild(tdMarket);
+
+      var tdFee = document.createElement("td");
+      tdFee.textContent = fmtInt(r.fee);
+      tr.appendChild(tdFee);
+
+      var tdTax = document.createElement("td");
+      tdTax.textContent = fmtInt(r.tax);
+      tr.appendChild(tdTax);
+
+      var tdOrder = document.createElement("td");
+      tdOrder.textContent = r.orderNo;
+      tr.appendChild(tdOrder);
+
+      body.appendChild(tr);
+
+      var fixedTr = document.createElement("tr");
+      var fixedTd = document.createElement("td");
+      var modifyBtn = document.createElement("button");
+      modifyBtn.className = "modify-btn";
+      modifyBtn.type = "button";
+      modifyBtn.textContent = "修改";
+      modifyBtn.addEventListener("click", function () {
+        modifyBtn.textContent = "已送出";
+        setTimeout(function () { modifyBtn.textContent = "修改"; }, 900);
+      });
+      fixedTd.appendChild(modifyBtn);
+      fixedTr.appendChild(fixedTd);
+      fixedBody.appendChild(fixedTr);
+    });
+  }
+
+  function renderAll() {
+    renderHead();
+    renderBody(sortRows());
+  }
+
+  document.getElementById("backBtn").addEventListener("click", function () {
+    var btn = this;
+    btn.style.transform = "scale(0.9)";
+    setTimeout(function () { btn.style.transform = ""; }, 120);
+  });
+
+  document.getElementById("refreshBtn").addEventListener("click", function () {
+    var btn = this;
+    btn.classList.add("is-spinning");
+    setTimeout(function () { btn.classList.remove("is-spinning"); }, 600);
+    var now = new Date();
+    document.getElementById("updateTime").textContent =
+      pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+  });
+
+  renderAll();
+})();
+</script>
