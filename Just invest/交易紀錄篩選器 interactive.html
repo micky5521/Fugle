@@ -1521,7 +1521,8 @@
   function renderTuneButton() {
     var totalCategories = Object.keys(ACTIONS).length;
     var categoryCount = state.categories.length === totalCategories ? 0 : state.categories.length;
-    var count = categoryCount + state.stocks.length;
+    var stockCount = state.stocks.length === STOCKS.length ? 0 : state.stocks.length;
+    var count = categoryCount + stockCount;
     var badge = document.getElementById("tuneBadge");
     badge.hidden = count === 0;
     badge.textContent = count;
@@ -1600,11 +1601,15 @@
     return chip;
   }
 
+  function isAllStocksActive() {
+    return sheetState.stocks.length === 0 || sheetState.stocks.length === STOCKS.length;
+  }
+
   function syncChipSelection() {
     var chips = document.querySelectorAll("#sheetStockArea .stock-chip[data-stock]");
     chips.forEach(function (chip) {
       var key = chip.getAttribute("data-stock");
-      var selected = key === "__all__" ? sheetState.stocks.length === 0 : sheetState.stocks.indexOf(key) !== -1;
+      var selected = key === "__all__" ? isAllStocksActive() : sheetState.stocks.indexOf(key) !== -1;
       chip.classList.toggle("is-selected", selected);
     });
   }
@@ -1630,7 +1635,7 @@
       var grid = document.createElement("div");
       grid.className = "stock-chip-grid";
 
-      grid.appendChild(makeStockChip("全部", sheetState.stocks.length === 0, function () {
+      grid.appendChild(makeStockChip("全部", isAllStocksActive(), function () {
         sheetState.stocks = [];
         syncChipSelection();
       }, 0, "__all__"));
