@@ -1376,9 +1376,6 @@
         } else {
           state.categories = state.categories.concat([cat]);
         }
-        if (state.categories.length === Object.keys(ACTIONS).length) {
-          state.categories = [];
-        }
         renderAll();
       });
       el.appendChild(btn);
@@ -1522,7 +1519,9 @@
   }
 
   function renderTuneButton() {
-    var count = state.categories.length + state.stocks.length;
+    var totalCategories = Object.keys(ACTIONS).length;
+    var categoryCount = state.categories.length === totalCategories ? 0 : state.categories.length;
+    var count = categoryCount + state.stocks.length;
     var badge = document.getElementById("tuneBadge");
     badge.hidden = count === 0;
     badge.textContent = count;
@@ -1557,7 +1556,8 @@
     allBtn.type = "button";
     allBtn.className = "chip";
     allBtn.textContent = "全部";
-    allBtn.setAttribute("aria-pressed", sheetState.categories.length === 0 ? "true" : "false");
+    var allActive = sheetState.categories.length === 0 || sheetState.categories.length === SHEET_CATEGORIES.length;
+    allBtn.setAttribute("aria-pressed", allActive ? "true" : "false");
     allBtn.addEventListener("click", function () {
       sheetState.categories = [];
       renderSheetCategoryChips();
@@ -1580,9 +1580,6 @@
           sheetState.categories = sheetState.categories.filter(function (x) { return x !== cat; });
         } else {
           sheetState.categories = sheetState.categories.concat([cat]);
-        }
-        if (sheetState.categories.length === SHEET_CATEGORIES.length) {
-          sheetState.categories = [];
         }
         renderSheetCategoryChips();
       });
