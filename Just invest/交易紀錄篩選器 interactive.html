@@ -1377,6 +1377,9 @@
         } else {
           state.categories = state.categories.concat([cat]);
         }
+        if (state.categories.length === Object.keys(ACTIONS).length) {
+          state.categories = [];
+        }
         renderAll();
       });
       el.appendChild(btn);
@@ -1742,9 +1745,11 @@
 
   document.getElementById("sheetApply").addEventListener("click", function () {
     if (sheetState.mode === "full") {
-      state.categories = sheetState.categories.slice();
+      var allCategoriesSelected = sheetState.categories.length === SHEET_CATEGORIES.length;
+      state.categories = allCategoriesSelected ? [] : sheetState.categories.slice();
     }
-    state.stocks = sheetState.stocks.slice();
+    var allStocksSelected = sheetState.stocks.length === STOCKS.length;
+    state.stocks = allStocksSelected ? [] : sheetState.stocks.slice();
     closeSheet();
     renderAll();
   });
