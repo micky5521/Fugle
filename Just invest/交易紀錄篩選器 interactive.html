@@ -663,6 +663,39 @@
     margin: 0 0 8px;
   }
 
+  .sheet-selected-row:empty { display: none; }
+
+  .sheet-selected-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    margin: 0 0 8px;
+  }
+
+  .sheet-selected-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .selected-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    border: 1.5px solid var(--ink);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  .selected-chip svg { flex-shrink: 0; }
+
   .sheet-chip-row {
     display: flex;
     flex-wrap: wrap;
@@ -775,23 +808,27 @@
 
   .stock-chip {
     border-radius: 8px;
-    border: none;
-    background: var(--surface-variant);
+    border: 1px solid var(--border);
+    background: var(--surface);
     color: var(--ink);
     font-family: inherit;
     font-size: 14px;
     line-height: 16px;
     padding: 8px 10px;
     cursor: pointer;
-    transition: background-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
     animation: chipEnter 0.2s cubic-bezier(0.3, 0.9, 0.3, 1) backwards;
   }
+
+  .stock-chip:hover { border-color: var(--accent); }
 
   .stock-chip:active { transform: scale(0.94); }
 
   .stock-chip.is-selected {
-    background: var(--tag-dark-bg);
-    color: #fff;
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
   }
 
   .sheet-apply {
@@ -1049,10 +1086,12 @@
         <div class="sheet-body">
           <div id="sheetCategorySection">
             <p class="sheet-section-label">篩選類別</p>
+            <div class="sheet-selected-row" id="sheetCategorySelected"></div>
             <div class="sheet-chip-row" id="sheetCategoryChips"></div>
           </div>
           <div>
             <p class="sheet-section-label" id="sheetStockLabel">篩選個股</p>
+            <div class="sheet-selected-row" id="sheetStockSelected"></div>
             <div class="sheet-search-row">
               <input class="sheet-search" type="text" id="sheetSearch" placeholder="輸入股票名稱或代碼" autocomplete="off" />
               <button class="sheet-clear" type="button" id="sheetClear" hidden>清除</button>
@@ -1485,18 +1524,39 @@
 
   var SHEET_CATEGORIES = ["現股", "融資", "融券"];
 
+  function makeSelectedChip(label, onRemove) {
+    var chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "selected-chip";
+    chip.innerHTML = '<span>' + label + '</span><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    chip.setAttribute("aria-label", "移除 " + label);
+    chip.addEventListener("click", onRemove);
+    return chip;
+  }
+
+  function renderSheetCategorySelected() {
+    var el = document.getElementById("sheetCategorySelected");
+    el.innerHTML = "";
+    if (sheetState.categories.length === 0) return;
+
+    var label = document.createElement("p");
+    label.className = "sheet-selected-label";
+    label.textContent = "已選取";
+    el.appendChild(label);
+
+    var row = document.createElement("div");
+    row.className = "sheet-selected-chip-row";
+    sheetState.categories.forEach(function (cat) {
+      row.appendChild(makeSelectedChip(cat, function () { toggleSheetCategory(cat); }));
+    });
+    el.appendChild(row);
+  }
+
   function renderSheetCategoryChips() {
     var el = document.getElementById("sheetCategoryChips");
     el.innerHTML = "";
 
-    var ordered = SHEET_CATEGORIES.slice().sort(function (a, b) {
-      var aSelected = sheetState.categories.indexOf(a) !== -1;
-      var bSelected = sheetState.categories.indexOf(b) !== -1;
-      if (aSelected === bSelected) return 0;
-      return aSelected ? -1 : 1;
-    });
-
-    ordered.forEach(function (cat) {
+    SHEET_CATEGORIES.forEach(function (cat) {
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "chip";
@@ -1517,6 +1577,7 @@
       sheetState.categories = sheetState.categories.filter(function (x) { return x !== cat; });
     }
     syncCategoryChipSelection();
+    renderSheetCategorySelected();
   }
 
   function syncCategoryChipSelection() {
@@ -1550,6 +1611,24 @@
     });
   }
 
+  function renderSheetStockSelected() {
+    var el = document.getElementById("sheetStockSelected");
+    el.innerHTML = "";
+    if (sheetState.stocks.length === 0) return;
+
+    var label = document.createElement("p");
+    label.className = "sheet-selected-label";
+    label.textContent = "已選取";
+    el.appendChild(label);
+
+    var row = document.createElement("div");
+    row.className = "sheet-selected-chip-row";
+    sheetState.stocks.forEach(function (s) {
+      row.appendChild(makeSelectedChip(s, function () { toggleStock(s); }));
+    });
+    el.appendChild(row);
+  }
+
   function toggleStock(s) {
     var i = sheetState.stocks.indexOf(s);
     if (i === -1) {
@@ -1558,6 +1637,7 @@
       sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
     }
     syncChipSelection();
+    renderSheetStockSelected();
   }
 
   function renderSheetStockChips() {
@@ -1571,14 +1651,7 @@
       var grid = document.createElement("div");
       grid.className = "stock-chip-grid";
 
-      var ordered = STOCKS.slice().sort(function (a, b) {
-        var aSelected = sheetState.stocks.indexOf(a) !== -1;
-        var bSelected = sheetState.stocks.indexOf(b) !== -1;
-        if (aSelected === bSelected) return 0;
-        return aSelected ? -1 : 1;
-      });
-
-      ordered.forEach(function (s, i) {
+      STOCKS.forEach(function (s, i) {
         var selected = sheetState.stocks.indexOf(s) !== -1;
         grid.appendChild(makeStockChip(s, selected, function () { toggleStock(s); }, i, s));
       });
@@ -1626,7 +1699,9 @@
     document.getElementById("sheetCategorySection").style.display = isFull ? "" : "none";
     document.getElementById("sheetStockLabel").style.display = isFull ? "" : "none";
 
+    renderSheetCategorySelected();
     renderSheetCategoryChips();
+    renderSheetStockSelected();
     renderSheetStockChips();
     document.getElementById("sheetOverlay").classList.add("is-open");
   }
@@ -1651,7 +1726,9 @@
     sheetState.query = "";
     sheetState.searchActive = false;
     document.getElementById("sheetSearch").value = "";
+    renderSheetCategorySelected();
     renderSheetCategoryChips();
+    renderSheetStockSelected();
     renderSheetStockChips();
   });
 
