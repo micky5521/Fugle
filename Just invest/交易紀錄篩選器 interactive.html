@@ -536,12 +536,11 @@
   .tune-btn {
     position: relative;
     flex-shrink: 0;
-    width: 36px;
     height: 32px;
-    padding: 6px 8px;
+    padding: 6px 10px 6px 8px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 4px;
     border: none;
     background: none;
     color: var(--ink);
@@ -551,6 +550,13 @@
   }
 
   .tune-btn:hover { background: var(--surface-variant); }
+
+  .tune-btn .label {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
 
   .tune-btn .badge {
     position: absolute;
@@ -567,48 +573,6 @@
     line-height: 14px;
     text-align: center;
   }
-
-  .stock-filter-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    flex-shrink: 0;
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 16px;
-    color: var(--ink);
-    background: var(--surface-variant);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 10px;
-    cursor: pointer;
-  }
-
-  .stock-filter-btn .chevron {
-    width: 7px;
-    height: 7px;
-    border-right: 1.6px solid var(--ink-muted);
-    border-bottom: 1.6px solid var(--ink-muted);
-    transform: rotate(45deg) translate(-1px, -1px);
-    flex-shrink: 0;
-  }
-
-  .selected-stock-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    flex-shrink: 0;
-    background: var(--tag-dark-bg);
-    color: #fff;
-    font-size: 14px;
-    line-height: 16px;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 10px;
-    cursor: pointer;
-  }
-
-  .selected-stock-pill svg { flex-shrink: 0; }
 
   /* Filter bottom sheet */
   .sheet-overlay {
@@ -1045,13 +1009,13 @@
         <div class="segment" id="segment" role="tablist" aria-label="日期區間"></div>
 
         <div class="filter-row">
-          <button class="tune-btn" type="button" id="tuneBtn" aria-label="重設篩選">
+          <button class="tune-btn" type="button" id="tuneBtn" aria-label="篩選">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="6" r="2.2" fill="currentColor"/><line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="12" r="2.2" fill="currentColor"/><line x1="4" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="18" r="2.2" fill="currentColor"/></svg>
+            <span class="label">個股</span>
             <span class="badge" id="tuneBadge" hidden>0</span>
           </button>
           <div class="filter-scroll">
             <div id="categoryChips" style="display:flex; gap:8px; flex-shrink:0;"></div>
-            <div id="stockFilterArea" style="display:flex; align-items:center; gap:8px; flex-wrap:nowrap; flex-shrink:0;"></div>
           </div>
         </div>
 
@@ -1377,40 +1341,11 @@
         } else {
           state.categories = state.categories.concat([cat]);
         }
-        if (state.categories.length === Object.keys(ACTIONS).length) {
-          state.categories = [];
-        }
         renderAll();
       });
       el.appendChild(btn);
     });
   }
-
-  function renderStockFilterArea() {
-    var el = document.getElementById("stockFilterArea");
-    el.innerHTML = "";
-
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "stock-filter-btn";
-    btn.innerHTML = '<span>篩選個股</span><span class="chevron"></span>';
-    btn.addEventListener("click", function () { openSheet("stocksOnly"); });
-    el.appendChild(btn);
-
-    state.stocks.forEach(function (s) {
-      var pill = document.createElement("button");
-      pill.type = "button";
-      pill.className = "selected-stock-pill";
-      pill.innerHTML = '<span>' + s + '</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>';
-      pill.setAttribute("aria-label", "移除 " + s);
-      pill.addEventListener("click", function () {
-        state.stocks = state.stocks.filter(function (x) { return x !== s; });
-        renderAll();
-      });
-      el.appendChild(pill);
-    });
-  }
-
 
   function renderHead() {
     var row = document.getElementById("tableHead");
@@ -1523,10 +1458,8 @@
   }
 
   function renderTuneButton() {
-    var totalCategories = Object.keys(ACTIONS).length;
-    var categoryCount = state.categories.length === totalCategories ? 0 : state.categories.length;
     var stockCount = state.stocks.length === STOCKS.length ? 0 : state.stocks.length;
-    var count = categoryCount + stockCount;
+    var count = state.categories.length + stockCount;
     var badge = document.getElementById("tuneBadge");
     badge.hidden = count === 0;
     badge.textContent = count;
@@ -1535,7 +1468,6 @@
   function renderAll() {
     renderSegment();
     renderCategoryChips();
-    renderStockFilterArea();
     renderTuneButton();
     renderHead();
 
@@ -1605,15 +1537,11 @@
     return chip;
   }
 
-  function isAllStocksActive() {
-    return sheetState.stocks.length === 0 || sheetState.stocks.length === STOCKS.length;
-  }
-
   function syncChipSelection() {
     var chips = document.querySelectorAll("#sheetStockArea .stock-chip[data-stock]");
     chips.forEach(function (chip) {
       var key = chip.getAttribute("data-stock");
-      var selected = key === "__all__" ? isAllStocksActive() : sheetState.stocks.indexOf(key) !== -1;
+      var selected = sheetState.stocks.indexOf(key) !== -1;
       chip.classList.toggle("is-selected", selected);
     });
   }
@@ -1639,18 +1567,16 @@
       var grid = document.createElement("div");
       grid.className = "stock-chip-grid";
 
-      grid.appendChild(makeStockChip("全部", isAllStocksActive(), function () {
-        sheetState.stocks = [];
-        syncChipSelection();
-      }, 0, "__all__"));
+      var ordered = STOCKS.slice().sort(function (a, b) {
+        var aSelected = sheetState.stocks.indexOf(a) !== -1;
+        var bSelected = sheetState.stocks.indexOf(b) !== -1;
+        if (aSelected === bSelected) return 0;
+        return aSelected ? -1 : 1;
+      });
 
-      var div = document.createElement("span");
-      div.className = "sheet-divider";
-      grid.appendChild(div);
-
-      STOCKS.forEach(function (s, i) {
+      ordered.forEach(function (s, i) {
         var selected = sheetState.stocks.indexOf(s) !== -1;
-        grid.appendChild(makeStockChip(s, selected, function () { toggleStock(s); }, i + 1, s));
+        grid.appendChild(makeStockChip(s, selected, function () { toggleStock(s); }, i, s));
       });
 
       el.appendChild(grid);
@@ -1745,8 +1671,7 @@
 
   document.getElementById("sheetApply").addEventListener("click", function () {
     if (sheetState.mode === "full") {
-      var allCategoriesSelected = sheetState.categories.length === SHEET_CATEGORIES.length;
-      state.categories = allCategoriesSelected ? [] : sheetState.categories.slice();
+      state.categories = sheetState.categories.slice();
     }
     var allStocksSelected = sheetState.stocks.length === STOCKS.length;
     state.stocks = allStocksSelected ? [] : sheetState.stocks.slice();
