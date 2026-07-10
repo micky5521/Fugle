@@ -1247,7 +1247,8 @@
     categories: [],
     stocks: [],
     query: "",
-    searchActive: false
+    searchActive: false,
+    selectedVisible: false
   };
 
   var EMPTY_ICON = '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="7" y="5" width="16" height="26" rx="2" stroke="currentColor" stroke-width="2"/><rect x="13" y="9" width="16" height="22" rx="2" fill="var(--surface-variant-high)" stroke="currentColor" stroke-width="2"/><line x1="17" y1="15" x2="25" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="25" x2="22" y2="25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
@@ -1540,7 +1541,7 @@
     row.innerHTML = "";
 
     var total = sheetState.categories.length + sheetState.stocks.length;
-    if (total === 0) {
+    if (!sheetState.selectedVisible || total === 0) {
       wrap.style.display = "none";
       return;
     }
@@ -1674,6 +1675,7 @@
     sheetState.mode = mode || "full";
     sheetState.categories = state.categories.slice();
     sheetState.stocks = state.stocks.slice();
+    sheetState.selectedVisible = (sheetState.categories.length + sheetState.stocks.length) > 0;
     sheetState.query = "";
     sheetState.searchActive = false;
     document.getElementById("sheetSearch").value = "";
@@ -1706,6 +1708,7 @@
       sheetState.categories = [];
     }
     sheetState.stocks = [];
+    sheetState.selectedVisible = false;
     sheetState.query = "";
     sheetState.searchActive = false;
     document.getElementById("sheetSearch").value = "";
