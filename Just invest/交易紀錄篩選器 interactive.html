@@ -935,10 +935,20 @@
   .pnl-flat { color: var(--ink-muted); }
 
   .empty-state {
-    padding: 40px 16px;
+    padding: 24px 30px;
     text-align: center;
-    color: var(--ink-muted);
-    font-size: 14px;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .empty-state-clear {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: var(--link);
+    cursor: pointer;
   }
 
   .foot-note {
@@ -1016,7 +1026,7 @@
         </div>
       </div>
 
-      <div class="table-wrap">
+      <div class="table-wrap" id="tableWrap">
         <table>
           <thead>
             <tr id="tableHead"></tr>
@@ -1024,7 +1034,10 @@
           <tbody id="tableBody"></tbody>
         </table>
       </div>
-      <div class="empty-state" id="emptyState" style="display:none;">這個區間內沒有符合篩選條件的交易紀錄</div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        此篩選條件無交易紀錄，請重新設定條件，<br />
+        或 <button type="button" class="empty-state-clear" id="emptyStateClear">清除篩選條件</button>。
+      </div>
     </div>
 
     <div class="sheet-overlay" id="sheetOverlay">
@@ -1103,7 +1116,7 @@
 
   var NOW = new Date(2026, 6, 3); // 2026-07-03
 
-  var STOCKS = ["元大台灣50", "凱基台灣TOP50", "台新金", "富邦金", "台積電", "聯發科", "中華電", "兆豐金", "國泰金", "元大高股息", "中信金", "玉山金", "鴻海", "穩懋", "力積電", "華邦電", "旺宏", "聯電"];
+  var ALL_STOCKS = ["元大台灣50", "凱基台灣TOP50", "台新金", "富邦金", "台積電", "聯發科", "中華電", "兆豐金", "國泰金", "元大高股息", "中信金", "玉山金", "鴻海", "穩懋", "力積電", "華邦電", "旺宏", "聯電"];
 
   // action map per category: [openAction, closeAction]
   var ACTIONS = {
@@ -1227,6 +1240,17 @@
     return { start: start, end: end };
   }
 
+  function getAvailableStocks() {
+    var b = getBounds();
+    var present = {};
+    RAW.forEach(function (r) {
+      var d = new Date(r.date + "T00:00:00");
+      if (d < b.start || d > b.end) return;
+      present[r.stock] = true;
+    });
+    return ALL_STOCKS.filter(function (s) { return present[s]; });
+  }
+
   function fmtInt(n) { return n.toLocaleString("en-US"); }
   function fmtPrice(n) {
     return n % 1 === 0 ? n.toLocaleString("en-US") : n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -1300,6 +1324,9 @@
         if (r.key === "custom") {
           openDateSheet();
           return;
+        }
+        if (state.range !== r.key) {
+          state.stocks = [];
         }
         state.range = r.key;
         renderAll();
@@ -1379,12 +1406,15 @@
   function renderBody(rows) {
     var body = document.getElementById("tableBody");
     var empty = document.getElementById("emptyState");
+    var wrap = document.getElementById("tableWrap");
     body.innerHTML = "";
 
     if (rows.length === 0) {
+      wrap.style.display = "none";
       empty.style.display = "block";
       return;
     }
+    wrap.style.display = "";
     empty.style.display = "none";
 
     rows.forEach(function (r) {
@@ -1441,7 +1471,7 @@
   }
 
   function renderTuneButton() {
-    var stockCount = state.stocks.length === STOCKS.length ? 0 : state.stocks.length;
+    var stockCount = state.stocks.length === getAvailableStocks().length ? 0 : state.stocks.length;
     var badge = document.getElementById("tuneBadge");
     badge.hidden = stockCount === 0;
     badge.textContent = stockCount;
@@ -1463,6 +1493,12 @@
     var btn = this;
     btn.style.transform = "scale(0.9)";
     setTimeout(function () { btn.style.transform = ""; }, 120);
+  });
+
+  document.getElementById("emptyStateClear").addEventListener("click", function () {
+    state.categories = [];
+    state.stocks = [];
+    renderAll();
   });
 
   function makeStockChip(label, selected, onToggle, index, stockKey) {
@@ -1508,7 +1544,7 @@
       var grid = document.createElement("div");
       grid.className = "stock-chip-grid";
 
-      STOCKS.forEach(function (s, i) {
+      getAvailableStocks().forEach(function (s, i) {
         var selected = sheetState.stocks.indexOf(s) !== -1;
         grid.appendChild(makeStockChip(s, selected, function () { toggleStock(s); }, i, s));
       });
@@ -1525,7 +1561,7 @@
       return;
     }
 
-    var candidates = STOCKS.filter(function (s) { return s.indexOf(q) !== -1; });
+    var candidates = getAvailableStocks().filter(function (s) { return s.indexOf(q) !== -1; });
 
     if (candidates.length === 0) {
       el.innerHTML =
@@ -1592,7 +1628,7 @@
   });
 
   document.getElementById("sheetApply").addEventListener("click", function () {
-    var allStocksSelected = sheetState.stocks.length === STOCKS.length;
+    var allStocksSelected = sheetState.stocks.length === getAvailableStocks().length;
     state.stocks = allStocksSelected ? [] : sheetState.stocks.slice();
     closeSheet();
     renderAll();
@@ -1710,10 +1746,6 @@
       cellWrap.className = "calendar-day-cell";
 
       if (c.outside) {
-        var outsideEl = document.createElement("div");
-        outsideEl.className = "calendar-day is-outside";
-        outsideEl.textContent = c.day;
-        cellWrap.appendChild(outsideEl);
         grid.appendChild(cellWrap);
         return;
       }
@@ -1734,13 +1766,13 @@
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "calendar-day";
+      btn.textContent = c.day;
       if (isToday) btn.classList.add("is-today");
       if (isStart || isEnd) btn.classList.add("is-endpoint");
       if (isFuture) {
         btn.classList.add("is-outside");
         btn.disabled = true;
       }
-      btn.textContent = c.day;
       btn.addEventListener("click", function () { pickDate(cd); });
       cellWrap.appendChild(btn);
       grid.appendChild(cellWrap);
@@ -1792,6 +1824,7 @@
 
   document.getElementById("dateConfirm").addEventListener("click", function () {
     if (!dateSheetState.start || !dateSheetState.end) return;
+    state.stocks = [];
     state.range = "custom";
     state.customStart = toISO(dateSheetState.start);
     state.customEnd = toISO(dateSheetState.end);
