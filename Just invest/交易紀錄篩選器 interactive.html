@@ -656,51 +656,6 @@
     overflow-y: auto;
   }
 
-  .sheet-section-label {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--ink-muted);
-    margin: 0 0 8px;
-  }
-
-  .sheet-selected-label {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--ink-muted);
-    margin: 0 0 8px;
-  }
-
-  .sheet-selected-chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .selected-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border-radius: 8px;
-    border: 1px solid var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    padding: 8px 10px 7px 10px;
-    cursor: pointer;
-  }
-
-  .selected-chip svg { flex-shrink: 0; }
-
-  .sheet-chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-  }
-
   .sheet-divider {
     width: 1px;
     height: 20px;
@@ -1076,22 +1031,13 @@
       <div class="bottom-sheet" role="dialog" aria-modal="true" id="bottomSheet" aria-labelledby="sheetTitle">
         <div class="sheet-header">
           <button class="sheet-reset" type="button" id="sheetReset">重設</button>
-          <span class="sheet-title" id="sheetTitle">篩選紀錄</span>
+          <span class="sheet-title" id="sheetTitle">篩選個股</span>
           <button class="sheet-close" type="button" id="sheetClose" aria-label="關閉">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </button>
         </div>
         <div class="sheet-body">
-          <div id="sheetSelectedSection" style="display:none;">
-            <p class="sheet-selected-label" id="sheetSelectedLabel">已選取</p>
-            <div class="sheet-selected-chip-row" id="sheetSelectedChips"></div>
-          </div>
-          <div id="sheetCategorySection">
-            <p class="sheet-section-label">篩選類別</p>
-            <div class="sheet-chip-row" id="sheetCategoryChips"></div>
-          </div>
           <div>
-            <p class="sheet-section-label" id="sheetStockLabel">篩選個股</p>
             <div class="sheet-search-row">
               <input class="sheet-search" type="text" id="sheetSearch" placeholder="輸入股票名稱或代碼" autocomplete="off" />
               <button class="sheet-clear" type="button" id="sheetClear" hidden>清除</button>
@@ -1243,12 +1189,9 @@
 
   var sheetState = {
     open: false,
-    mode: "full",
-    categories: [],
     stocks: [],
     query: "",
-    searchActive: false,
-    selectedVisible: false
+    searchActive: false
   };
 
   var EMPTY_ICON = '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="7" y="5" width="16" height="26" rx="2" stroke="currentColor" stroke-width="2"/><rect x="13" y="9" width="16" height="22" rx="2" fill="var(--surface-variant-high)" stroke="currentColor" stroke-width="2"/><line x1="17" y1="15" x2="25" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="25" x2="22" y2="25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
@@ -1499,10 +1442,9 @@
 
   function renderTuneButton() {
     var stockCount = state.stocks.length === STOCKS.length ? 0 : state.stocks.length;
-    var count = state.categories.length + stockCount;
     var badge = document.getElementById("tuneBadge");
-    badge.hidden = count === 0;
-    badge.textContent = count;
+    badge.hidden = stockCount === 0;
+    badge.textContent = stockCount;
   }
 
   function renderAll() {
@@ -1522,75 +1464,6 @@
     btn.style.transform = "scale(0.9)";
     setTimeout(function () { btn.style.transform = ""; }, 120);
   });
-
-  var SHEET_CATEGORIES = ["現股", "融資", "融券"];
-
-  function makeSelectedChip(label, onRemove) {
-    var chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "selected-chip";
-    chip.innerHTML = '<span>' + label + '</span><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
-    chip.setAttribute("aria-label", "移除 " + label);
-    chip.addEventListener("click", onRemove);
-    return chip;
-  }
-
-  function renderSheetSelected() {
-    var wrap = document.getElementById("sheetSelectedSection");
-    var row = document.getElementById("sheetSelectedChips");
-    row.innerHTML = "";
-
-    var total = sheetState.categories.length + sheetState.stocks.length;
-    if (!sheetState.selectedVisible || total === 0) {
-      wrap.style.display = "none";
-      return;
-    }
-    wrap.style.display = "";
-
-    sheetState.categories.forEach(function (cat) {
-      row.appendChild(makeSelectedChip(cat, function () { toggleSheetCategory(cat); }));
-    });
-    sheetState.stocks.forEach(function (s) {
-      row.appendChild(makeSelectedChip(s, function () { toggleStock(s); }));
-    });
-  }
-
-  function renderSheetCategoryChips() {
-    var el = document.getElementById("sheetCategoryChips");
-    el.innerHTML = "";
-
-    SHEET_CATEGORIES.forEach(function (cat) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.textContent = cat;
-      btn.setAttribute("data-cat", cat);
-      var selected = sheetState.categories.indexOf(cat) !== -1;
-      btn.setAttribute("aria-pressed", selected ? "true" : "false");
-      btn.addEventListener("click", function () { toggleSheetCategory(cat); });
-      el.appendChild(btn);
-    });
-  }
-
-  function toggleSheetCategory(cat) {
-    var i = sheetState.categories.indexOf(cat);
-    if (i === -1) {
-      sheetState.categories = sheetState.categories.concat([cat]);
-    } else {
-      sheetState.categories = sheetState.categories.filter(function (x) { return x !== cat; });
-    }
-    syncCategoryChipSelection();
-    renderSheetSelected();
-  }
-
-  function syncCategoryChipSelection() {
-    var chips = document.querySelectorAll("#sheetCategoryChips .chip[data-cat]");
-    chips.forEach(function (chip) {
-      var cat = chip.getAttribute("data-cat");
-      var selected = sheetState.categories.indexOf(cat) !== -1;
-      chip.setAttribute("aria-pressed", selected ? "true" : "false");
-    });
-  }
 
   function makeStockChip(label, selected, onToggle, index, stockKey) {
     var chip = document.createElement("button");
@@ -1622,7 +1495,6 @@
       sheetState.stocks = sheetState.stocks.filter(function (x) { return x !== s; });
     }
     syncChipSelection();
-    renderSheetSelected();
   }
 
   function renderSheetStockChips() {
@@ -1670,23 +1542,13 @@
     el.appendChild(resultGrid);
   }
 
-  function openSheet(mode) {
+  function openSheet() {
     sheetState.open = true;
-    sheetState.mode = mode || "full";
-    sheetState.categories = state.categories.slice();
     sheetState.stocks = state.stocks.slice();
-    sheetState.selectedVisible = (sheetState.categories.length + sheetState.stocks.length) > 0;
     sheetState.query = "";
     sheetState.searchActive = false;
     document.getElementById("sheetSearch").value = "";
 
-    var isFull = sheetState.mode === "full";
-    document.getElementById("sheetTitle").textContent = isFull ? "篩選紀錄" : "篩選個股";
-    document.getElementById("sheetCategorySection").style.display = isFull ? "" : "none";
-    document.getElementById("sheetStockLabel").style.display = isFull ? "" : "none";
-
-    renderSheetSelected();
-    renderSheetCategoryChips();
     renderSheetStockChips();
     document.getElementById("sheetOverlay").classList.add("is-open");
   }
@@ -1696,7 +1558,7 @@
     document.getElementById("sheetOverlay").classList.remove("is-open");
   }
 
-  document.getElementById("tuneBtn").addEventListener("click", function () { openSheet("full"); });
+  document.getElementById("tuneBtn").addEventListener("click", openSheet);
 
   document.getElementById("sheetOverlay").addEventListener("click", function (e) {
     if (e.target === this) closeSheet();
@@ -1704,16 +1566,10 @@
   document.getElementById("sheetClose").addEventListener("click", closeSheet);
 
   document.getElementById("sheetReset").addEventListener("click", function () {
-    if (sheetState.mode === "full") {
-      sheetState.categories = [];
-    }
     sheetState.stocks = [];
-    sheetState.selectedVisible = false;
     sheetState.query = "";
     sheetState.searchActive = false;
     document.getElementById("sheetSearch").value = "";
-    renderSheetSelected();
-    renderSheetCategoryChips();
     renderSheetStockChips();
   });
 
@@ -1736,9 +1592,6 @@
   });
 
   document.getElementById("sheetApply").addEventListener("click", function () {
-    if (sheetState.mode === "full") {
-      state.categories = sheetState.categories.slice();
-    }
     var allStocksSelected = sheetState.stocks.length === STOCKS.length;
     state.stocks = allStocksSelected ? [] : sheetState.stocks.slice();
     closeSheet();
