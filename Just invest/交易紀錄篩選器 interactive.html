@@ -303,7 +303,7 @@
   .segment button[aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-ink);
-    font-weight: 400;
+    font-weight: 700;
   }
 
   /* Date range picker sheet */
@@ -534,19 +534,18 @@
   }
 
   .tune-btn {
-    position: relative;
     flex-shrink: 0;
     height: 32px;
-    padding: 6px 10px 6px 8px;
+    padding: 6px 8px;
     display: flex;
     align-items: center;
     gap: 4px;
-    border: none;
+    border: 0.5px solid transparent;
     background: none;
     color: var(--ink);
     cursor: pointer;
     border-radius: 8px;
-    transition: background-color 0.15s;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
   }
 
   .tune-btn:hover { background: var(--surface-variant); }
@@ -554,23 +553,29 @@
   .tune-btn .label {
     font-family: inherit;
     font-size: 14px;
-    color: var(--ink);
+    color: inherit;
     white-space: nowrap;
   }
 
+  .tune-btn.is-active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .tune-btn.is-active:hover { background: var(--accent-soft); }
+
   .tune-btn .badge {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    min-width: 14px;
-    height: 14px;
+    flex-shrink: 0;
+    min-width: 16px;
+    height: 16px;
     padding: 0 3px;
-    border-radius: 7px;
+    border-radius: 999px;
     background: var(--accent);
     color: var(--accent-ink);
     font-size: 10px;
-    font-weight: 700;
-    line-height: 14px;
+    font-weight: 400;
+    line-height: 16px;
     text-align: center;
   }
 
@@ -1475,6 +1480,7 @@
     var badge = document.getElementById("tuneBadge");
     badge.hidden = stockCount === 0;
     badge.textContent = stockCount;
+    document.getElementById("tuneBtn").classList.toggle("is-active", stockCount > 0);
   }
 
   function renderAll() {
