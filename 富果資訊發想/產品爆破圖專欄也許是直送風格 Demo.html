@@ -405,5 +405,112 @@ document.addEventListener('DOMContentLoaded', async function() {
   setTimeout(apply, 3000);
 })();
 </script>
+<script>
+(function () {
+  "use strict";
+  var FUGLE_ICON = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzQiIGhlaWdodD0iNzQiIHZpZXdCb3g9IjAgMCA3NCA3NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzU0XzM1OCkiPgo8cGF0aCBkPSJNMTAuODc2MSAxNS44Nzk3QzEwLjg3NjEgMTUuODc5NyAxOS43ODk3IDIwLjUxODYgMTguMzgyMiAyNy45MjhDMjAuNDA0MSAyMy43NjY4IDIxLjIwODEgMTcuMjY0OSAyOS43MzUxIDE1LjcxQzI5LjczNTEgMTYuMDY3OCAxOS43NjYgOS44Njg0NSAxMC44NzYxIDE1Ljg3OTdaIiBmaWxsPSIjRjRBRjFDIi8+CjxwYXRoIGQ9Ik02Ny45ODc0IDQuMjE1MDVDNjcuOTg3NCA0LjIxNTA1IDY0LjM4MjkgOC4xNTY3NSA0OS45OTk4IDEyLjA0ODdDMzUuMjAyOCAxNi42OTEzIDIwLjc3NDEgMTUuODIyNSAyMC44NTggNDAuNTA3NUMyMC43NzA0IDQyLjU2MjMgMTkuODIwNiA1NC4wNjY1IDkuNTI1MDIgNjguOTc3NUMxMC41Nzg4IDY4Ljk3MzggMjYuNTExNyA1OS4zNzUgMzIuMzA1OCA0OC4yMDFMMzIuNDUzNCA0Ny44OTQ4QzMzLjIyODMgNDUuOTcxIDMzLjk1MjEgNDQuODY3OSAzOC4xMzYzIDQzLjU0NzNDNDUuMTgxMSA0MS4yODIyIDU2LjQ3MzkgMzguMjM4OCA2MC40NzIyIDI1LjI1MzVDNjAuNDcyMiAyNS4yNTM1IDU5LjgxNTggMjUuNjA3NiA1OC42Mzk5IDI2LjEyMjJDNTguMTIwMyAyNi4zNDczIDUzLjU2MjMgMjcuOTU1NyA0Ny45OTA2IDI4LjI4MDNDNDEuMDg0NCAyOC42ODk4IDM4LjYyMTMgMzAuMTk0OSAzOC42MjEzIDMwLjE5NDlDNDAuNzAzNCAyNy44MjI5IDQzLjEwODEgMjYuNDk0OCA0NS4yMDEyIDI1Ljc1MTVDNDYuMzM3IDI1LjQ1MjcgNDcuNDc4MyAyNS4yMjIxIDQ4LjYwNjkgMjUuMDkzQzQ5LjIxMDMgMjUuMDA2MyA0OS43ODI4IDI0LjkxNzggNTAuMzQyNSAyNC44MjM3SDUwLjQzNzRDNTAuNDM3NCAyNC44MjM3IDUwLjQxMzcgMjQuODIxOSA1MC4zNjk5IDI0LjgyMTlDNjMuNDE0OCAyMi42MjMyIDY0LjUxNiAxNy44MzMgNjYuMDYyMSAxMy4wNzk3QzY4LjI2MjcgNi4zMDY3MiA2Ny45ODkyIDQuMjE2ODkgNjcuOTg5MiA0LjIxNjg5TDY3Ljk4NzQgNC4yMTUwNVoiIGZpbGw9IiNGNEFGMUMiLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF81NF8zNTgiPgo8cmVjdCB3aWR0aD0iNzQiIGhlaWdodD0iNzQiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K";
+  var MAP = [
+    ["台積電", "2330"],
+    ["大立光", "3008"],
+    ["鴻海", "2317"],
+    ["可成", "2474"],
+    ["玉晶光", "3406"],
+    ["日月光投控", "3711"],
+    ["日月光", "3711"],
+    ["臻鼎", "4958"],
+    ["和碩", "4938"],
+    ["欣興", "3037"],
+    ["南電", "8046"],
+    ["美律", "2439"],
+    ["台郡", "6269"],
+    ["業成", "6456"]
+  ];
+  MAP.sort(function (a, b) { return b[0].length - a[0].length; });
+  var SKIP_TAGS = { A: 1, SCRIPT: 1, STYLE: 1, TITLE: 1, NOSCRIPT: 1 };
+
+  function findFirstMatch(text) {
+    var best = null;
+    for (var i = 0; i < MAP.length; i++) {
+      var idx = text.indexOf(MAP[i][0]);
+      if (idx !== -1 && (best === null || idx < best.idx)) {
+        best = { idx: idx, name: MAP[i][0], code: MAP[i][1] };
+      }
+    }
+    return best;
+  }
+
+  function makeLink(name, code) {
+    var a = document.createElement("a");
+    a.href = "https://www.fugle.tw/ai/" + code;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.setAttribute("data-fugle-link", "1");
+    a.style.color = "inherit";
+    a.style.textDecoration = "underline";
+    a.style.textUnderlineOffset = "2px";
+
+    var img = document.createElement("img");
+    img.src = FUGLE_ICON;
+    img.alt = "Fugle";
+    img.setAttribute("data-fugle-link", "1");
+    img.style.cssText = "display:inline-block;width:1em;height:1em;vertical-align:-0.15em;margin-right:0.2em;";
+
+    a.appendChild(img);
+    a.appendChild(document.createTextNode(name));
+    return a;
+  }
+
+  function processTextNode(node) {
+    var text = node.nodeValue;
+    if (!text) return;
+    var match = findFirstMatch(text);
+    if (!match) return;
+
+    var frag = document.createDocumentFragment();
+    var rest = text;
+    while (match) {
+      var before = rest.slice(0, match.idx);
+      if (before) frag.appendChild(document.createTextNode(before));
+      frag.appendChild(makeLink(match.name, match.code));
+      rest = rest.slice(match.idx + match.name.length);
+      match = findFirstMatch(rest);
+    }
+    if (rest) frag.appendChild(document.createTextNode(rest));
+
+    if (node.parentNode) node.parentNode.replaceChild(frag, node);
+  }
+
+  function walk(node) {
+    if (node.nodeType === 3) {
+      processTextNode(node);
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    if (SKIP_TAGS[node.tagName]) return;
+    if (node.getAttribute && node.getAttribute("data-fugle-link")) return;
+    var children = [];
+    for (var i = 0; i < node.childNodes.length; i++) children.push(node.childNodes[i]);
+    for (var j = 0; j < children.length; j++) walk(children[j]);
+  }
+
+  function runOnce() {
+    if (document.body) walk(document.body);
+  }
+
+  [500, 1000, 2000, 3500, 5500, 8000].forEach(function (ms) {
+    setTimeout(runOnce, ms);
+  });
+
+  setTimeout(function () {
+    if (!document.body) return;
+    var timer;
+    var mo = new MutationObserver(function () {
+      clearTimeout(timer);
+      timer = setTimeout(runOnce, 200);
+    });
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }, 2500);
+})();
+</script>
 </body>
 </html>
