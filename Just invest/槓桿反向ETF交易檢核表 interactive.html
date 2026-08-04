@@ -491,10 +491,10 @@
 <div class="studio-tag">
   <span class="eyebrow">互動原型 · Prototype</span>
   <h1>槓桿反向 ETF 交易檢核表</h1>
-  <p>依 Figma 設計稿還原「簽署同意書」檢核流程的兩種情境 — 答對 (綠色) 與答錯 (琥珀色需重新作答)。題目 1、2 內容與說明文字皆取自設計稿；下方切換鈕可直接跳到對應情境重看。</p>
+  <p>依 Figma 兩個 Section 還原「簽署同意書」檢核表的兩種真實設計行為 — 差異在答錯之後：設計 A 會跳出「重新作答」按鈕才能再選；設計 B 答錯不出現按鈕，「是／否」保持可點，直接重選即可。題目 1、2 內容與說明文字皆取自設計稿。</p>
   <div class="scenario-switch">
-    <button class="scenario-btn" type="button" id="scenarioCorrect">情境一・答對</button>
-    <button class="scenario-btn" type="button" id="scenarioWrong">情境二・答錯需重答</button>
+    <button class="scenario-btn" type="button" id="modeA">設計 A・需按「重新作答」</button>
+    <button class="scenario-btn" type="button" id="modeB">設計 B・答錯免按鈕直接重選</button>
   </div>
 </div>
 
@@ -561,14 +561,21 @@
     }
   ];
 
-  var state = { index: 0, selected: null, done: false };
+  // 兩個 Figma section 的真實差異只在「答錯之後」：
+  // 設計 A (17640-17653)：答錯會出現「重新作答」按鈕，按下才能重選；作答按鈕答完即鎖定。
+  // 設計 B (17640-17654)：答錯完全不出現底部按鈕，「是／否」保持可點，直接點其他選項即可重選；只有答對才會出現「下一題」。
+  var state = { mode: "A", index: 0, selected: null, done: false };
   var content = document.getElementById("quizContent");
+  var actionBar = document.querySelector(".action-bar");
   var actionBtn = document.getElementById("actionBtn");
   var scrollArea = document.getElementById("scrollArea");
 
   function render() {
     if (state.done) {
       renderDone();
+      actionBar.style.display = "";
+      actionBtn.disabled = false;
+      actionBtn.style.opacity = "1";
       actionBtn.textContent = "重新開始";
       return;
     }
@@ -576,6 +583,10 @@
     var q = QUESTIONS[state.index];
     var answered = state.selected !== null;
     var isCorrect = answered && state.selected === q.correct;
+    // 設計 A：答完 (不論對錯) 就鎖住選項。設計 B：只有答對才鎖住，答錯保持可以直接重選。
+    var locked = answered && (state.mode === "A" || isCorrect);
+    // 設計 A：答完就顯示按鈕 (對→下一題／錯→重新作答)。設計 B：只有答對才顯示按鈕。
+    var showActionBar = state.mode === "A" ? answered : isCorrect;
 
     var html = "";
     html += '<p class="q-title">' + q.title + "</p>";
@@ -590,21 +601,16 @@
         if (label === q.correct) { cls += " is-correct"; icon = CHECK_ICON; }
         else { cls += " is-incorrect"; icon = CROSS_ICON; }
       }
-      var disabledAttr = answered ? "disabled" : "";
+      var disabledAttr = locked ? "disabled" : "";
       html += '<button class="' + cls + '" type="button" data-answer="' + label + '" ' + disabledAttr + ">" + label + icon + "</button>";
     });
 
     if (answered) {
       var fbCls = isCorrect ? "feedback is-correct" : "feedback is-incorrect";
       var titleText = isCorrect ? "正確" : "正確答案是「" + q.correct + "」";
-      var titleIcon = isCorrect ? CHECK_ICON.replace('class="mark"', 'class="mark"') : CROSS_ICON;
+      var titleIcon = isCorrect ? CHECK_ICON : CROSS_ICON;
       var bodyText = q.feedback[q.correct];
-      var bodyCls = "feedback-body";
-      if (!bodyText) {
-        bodyText = "（設計稿僅提供「" + q.correct + "」這個作答結果的說明文字，此路徑的詳細解說暫無設計稿內容，故不在此杜撰。）";
-        bodyCls += " is-placeholder";
-      }
-      html += '<div class="' + fbCls + '"><div class="feedback-title">' + titleIcon + "<span>" + titleText + '</span></div><p class="' + bodyCls + '">' + bodyText + "</p></div>";
+      html += '<div class="' + fbCls + '"><div class="feedback-title">' + titleIcon + "<span>" + titleText + '</span></div><p class="feedback-body">' + bodyText + "</p></div>";
     }
 
     content.innerHTML = html;
@@ -613,13 +619,15 @@
       btn.addEventListener("click", function () {
         state.selected = btn.getAttribute("data-answer");
         render();
-        scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: "smooth" });
       });
     });
 
-    actionBtn.textContent = isCorrect ? "下一題" : "重新作答";
-    actionBtn.disabled = !answered;
-    actionBtn.style.opacity = answered ? "1" : "0.45";
+    actionBar.style.display = showActionBar ? "" : "none";
+    if (showActionBar) {
+      actionBtn.textContent = isCorrect ? "下一題" : "重新作答";
+      actionBtn.disabled = false;
+      actionBtn.style.opacity = "1";
+    }
   }
 
   function renderDone() {
@@ -632,10 +640,6 @@
   }
 
   actionBtn.addEventListener("click", function () {
-    if (actionBtn.disabled) return;
-    var q = QUESTIONS[state.index];
-    var isCorrect = state.selected === q.correct;
-
     if (state.done) {
       state.index = 0;
       state.selected = null;
@@ -644,7 +648,11 @@
       return;
     }
 
+    var q = QUESTIONS[state.index];
+    var isCorrect = state.selected === q.correct;
+
     if (!isCorrect) {
+      // 只有設計 A 會走到這裡 (設計 B 答錯時按鈕本來就是隱藏的)
       state.selected = null;
       render();
       return;
@@ -666,22 +674,20 @@
     setTimeout(function () { btn.style.transform = ""; }, 120);
   });
 
-  function goScenario(index, answer, scenarioBtnId) {
-    state.index = index;
-    state.selected = answer;
+  function setMode(mode, btnId) {
+    state.mode = mode;
+    state.index = 0;
+    state.selected = null;
     state.done = false;
     render();
     document.querySelectorAll(".scenario-btn").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
-    document.getElementById(scenarioBtnId).setAttribute("aria-pressed", "true");
+    document.getElementById(btnId).setAttribute("aria-pressed", "true");
   }
 
-  document.getElementById("scenarioCorrect").addEventListener("click", function () {
-    goScenario(0, "否", "scenarioCorrect");
-  });
-  document.getElementById("scenarioWrong").addEventListener("click", function () {
-    goScenario(1, "否", "scenarioWrong");
-  });
+  document.getElementById("modeA").addEventListener("click", function () { setMode("A", "modeA"); });
+  document.getElementById("modeB").addEventListener("click", function () { setMode("B", "modeB"); });
 
+  document.getElementById("modeA").setAttribute("aria-pressed", "true");
   render();
 })();
 </script>
