@@ -1,0 +1,687 @@
+<title>槓桿反向ETF交易檢核表 · 互動原型</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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" />
+<style>
+  :root {
+    --backdrop-1: #efece6;
+    --backdrop-2: #e5ded3;
+    --bezel: #1b1a18;
+    --bezel-edge: #35322d;
+    --surface: #ffffff;
+    --surface-variant: #f5f5f5;
+    --border: #eaeaea;
+    --border-heavy: #dfdfdf;
+    --ink: #323232;
+    --ink-muted: #8b8a8a;
+    --ink-faint: #c3c1bd;
+    --accent: #fa5a00;
+    --accent-soft: #fff5f0;
+    --accent-ink: #ffffff;
+    --success-bg: #ebfae6;
+    --success-ink: #339c09;
+    --warning-bg: #fff8e1;
+    --warning-ink: #bf800b;
+    --shadow: rgba(35, 26, 15, 0.22);
+    --caption-ink: #6b675f;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --backdrop-1: #111013;
+      --backdrop-2: #1a181c;
+      --bezel: #050505;
+      --bezel-edge: #232226;
+      --surface: #1c1c1e;
+      --surface-variant: #0f0f10;
+      --border: #333338;
+      --border-heavy: #424248;
+      --ink: #f1efec;
+      --ink-muted: #9c9a9e;
+      --ink-faint: #45444a;
+      --accent: #ff7a35;
+      --accent-soft: rgba(255, 122, 53, 0.16);
+      --accent-ink: #1c1c1e;
+      --success-bg: rgba(51, 156, 9, 0.16);
+      --success-ink: #6bd94a;
+      --warning-bg: rgba(191, 128, 11, 0.16);
+      --warning-ink: #e0ab3d;
+      --shadow: rgba(0, 0, 0, 0.55);
+      --caption-ink: #b9b6b0;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --backdrop-1: #111013;
+    --backdrop-2: #1a181c;
+    --bezel: #050505;
+    --bezel-edge: #232226;
+    --surface: #1c1c1e;
+    --surface-variant: #0f0f10;
+    --border: #333338;
+    --border-heavy: #424248;
+    --ink: #f1efec;
+    --ink-muted: #9c9a9e;
+    --ink-faint: #45444a;
+    --accent: #ff7a35;
+    --accent-soft: rgba(255, 122, 53, 0.16);
+    --accent-ink: #1c1c1e;
+    --success-bg: rgba(51, 156, 9, 0.16);
+    --success-ink: #6bd94a;
+    --warning-bg: rgba(191, 128, 11, 0.16);
+    --warning-ink: #e0ab3d;
+    --shadow: rgba(0, 0, 0, 0.55);
+    --caption-ink: #b9b6b0;
+  }
+
+  :root[data-theme="light"] {
+    --backdrop-1: #efece6;
+    --backdrop-2: #e5ded3;
+    --bezel: #1b1a18;
+    --bezel-edge: #35322d;
+    --surface: #ffffff;
+    --surface-variant: #f5f5f5;
+    --border: #eaeaea;
+    --border-heavy: #dfdfdf;
+    --ink: #323232;
+    --ink-muted: #8b8a8a;
+    --ink-faint: #c3c1bd;
+    --accent: #fa5a00;
+    --accent-soft: #fff5f0;
+    --accent-ink: #ffffff;
+    --success-bg: #ebfae6;
+    --success-ink: #339c09;
+    --warning-bg: #fff8e1;
+    --warning-ink: #bf800b;
+    --shadow: rgba(35, 26, 15, 0.22);
+    --caption-ink: #6b675f;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html, body { margin: 0; min-height: 100%; }
+
+  body {
+    font-family: "LINE Seed TW", "LINE Seed TW_TTF", -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 18% 12%, var(--backdrop-2), transparent 55%),
+      radial-gradient(circle at 84% 88%, var(--backdrop-2), transparent 50%),
+      var(--backdrop-1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 22px;
+    padding: 48px 20px 64px;
+  }
+
+  .studio-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .studio-tag .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .studio-tag h1 { margin: 0; font-size: 19px; font-weight: 700; color: var(--ink); }
+
+  .studio-tag p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--caption-ink);
+    max-width: 360px;
+    line-height: 1.5;
+  }
+
+  .scenario-switch {
+    display: flex;
+    gap: 8px;
+  }
+
+  .scenario-btn {
+    border: 1px solid var(--border-heavy);
+    background: var(--surface);
+    color: var(--ink-muted);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .scenario-btn[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .device {
+    background: linear-gradient(160deg, var(--bezel-edge), var(--bezel) 60%);
+    border-radius: 52px;
+    padding: 14px;
+    box-shadow: 0 30px 60px -20px var(--shadow), 0 2px 10px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  .screen {
+    width: 402px;
+    height: 852px;
+    background: var(--surface);
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .dynamic-island {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 108px;
+    height: 28px;
+    background: var(--bezel);
+    border-radius: 16px;
+    z-index: 20;
+  }
+
+  .chrome {
+    flex-shrink: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 26px 8px;
+  }
+
+  .status-bar .time {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-icons { display: flex; align-items: center; gap: 6px; color: var(--ink); }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 4px;
+    position: relative;
+  }
+
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .icon-btn:hover { background: var(--surface-variant); }
+
+  .header-row h2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+  }
+
+  .scroll-area::-webkit-scrollbar { display: none; width: 0; }
+
+  .content {
+    padding: 16px 20px 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .q-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .q-progress {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .q-progress .num { color: var(--accent); }
+
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .progress-rail {
+    flex: 1;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-variant);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.25s ease;
+  }
+
+  .progress-pct {
+    font-size: 12px;
+    color: var(--ink-muted);
+    width: 34px;
+    text-align: right;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .q-body {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .answer-btn {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: var(--surface-variant);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+
+  .answer-btn:disabled { cursor: default; }
+
+  .answer-btn.is-correct {
+    background: var(--success-bg);
+    border-color: var(--success-ink);
+    color: var(--success-ink);
+  }
+
+  .answer-btn.is-incorrect {
+    background: var(--warning-bg);
+    border-color: var(--warning-ink);
+    color: var(--warning-ink);
+  }
+
+  .answer-btn .mark { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .feedback {
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .feedback.is-correct { background: var(--success-bg); color: var(--success-ink); }
+  .feedback.is-incorrect { background: var(--warning-bg); color: var(--warning-ink); }
+
+  .feedback-title {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .feedback-title .mark { width: 20px; height: 20px; flex-shrink: 0; }
+
+  .feedback-body {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .feedback-body.is-placeholder {
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  .tap-ripple {
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  .tap-ripple::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    margin: -18px 0 0 -18px;
+    border-radius: 50%;
+    background: rgba(250, 90, 0, 0.3);
+    transform: scale(0);
+    animation: tap-pulse 0.55s ease-out;
+  }
+
+  @keyframes tap-pulse {
+    0% { transform: scale(0.3); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  .action-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--surface);
+    padding: 24px 20px 36px;
+  }
+
+  .action-btn {
+    width: 100%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+  }
+
+  .action-btn:hover { opacity: 0.92; }
+  .action-btn:active { transform: scale(0.98); }
+
+  .done-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    padding: 80px 32px 0;
+  }
+
+  .done-screen .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .done-screen h3 { margin: 0; font-size: 17px; font-weight: 700; color: var(--ink); }
+  .done-screen p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--ink-muted); max-width: 280px; }
+
+  .foot-note {
+    max-width: 360px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--caption-ink);
+  }
+
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="studio-tag">
+  <span class="eyebrow">互動原型 · Prototype</span>
+  <h1>槓桿反向 ETF 交易檢核表</h1>
+  <p>依 Figma 設計稿還原「簽署同意書」檢核流程的兩種情境 — 答對 (綠色) 與答錯 (琥珀色需重新作答)。題目 1、2 內容與說明文字皆取自設計稿；下方切換鈕可直接跳到對應情境重看。</p>
+  <div class="scenario-switch">
+    <button class="scenario-btn" type="button" id="scenarioCorrect">情境一・答對</button>
+    <button class="scenario-btn" type="button" id="scenarioWrong">情境二・答錯需重答</button>
+  </div>
+</div>
+
+<div class="device">
+  <div class="screen">
+    <div class="dynamic-island"></div>
+    <div class="chrome">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <span class="status-icons">
+          <svg width="19" height="12" viewBox="0 0 19 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="0.6" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="0.6" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="0.6" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="0.6" fill="currentColor"/></svg>
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M8.5 10.6a1.3 1.3 0 100-2.6 1.3 1.3 0 000 2.6z" fill="currentColor"/><path d="M4.9 6.9a5.1 5.1 0 017.2 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M2 4a9 9 0 0113 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x="0.75" y="0.75" width="21.5" height="11.5" rx="3" stroke="currentColor" stroke-width="1.1"/><rect x="2.3" y="2.3" width="18.4" height="8.4" rx="1.6" fill="currentColor"/><rect x="23" y="4" width="2" height="5" rx="1" fill="currentColor"/></svg>
+        </span>
+      </div>
+      <div class="header-row">
+        <button class="icon-btn" type="button" aria-label="返回" id="backBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2>簽署同意書</h2>
+      </div>
+    </div>
+
+    <div class="scroll-area" id="scrollArea">
+      <div class="content" id="quizContent"></div>
+      <div class="action-bar">
+        <button class="action-btn" type="button" id="actionBtn">下一題</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="foot-note">完整檢核表共 17 題，設計稿僅提供第 1、2 題的文案與說明；此原型只精確還原這兩題，第 3 題以後不虛構內容。點選「情境一 / 情境二」可直接切換到對應的作答結果重看效果。</p>
+
+<script>
+(function () {
+  "use strict";
+
+  var CHECK_ICON = '<svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CROSS_ICON = '<svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  var QUESTIONS = [
+    {
+      n: 1,
+      total: 17,
+      pct: 6,
+      title: "槓桿反向指數股票型期貨信託基金受益憑證交易檢核表",
+      body: "槓桿型及反向型期貨 ETF 以追蹤、模擬或複製每日標的指數報酬率正向倍數或反向倍數為目標，為一段期間（例如：數日或數週）內標的指數正向倍數或反向倍數之累積報酬率。",
+      correct: "否",
+      feedback: {
+        "否": "槓桿型反向型 ETF 追蹤的是「單日」報酬倍數，不是一段期間的累積倍數。因為每日動態調整加上複利路徑效應，只要持有超過一天，累積報酬就會偏離指數倍數，這正是它不適合長期持有的原因。題目後半「為一段期間內之累積報酬率」的敘述是錯的。"
+      }
+    },
+    {
+      n: 2,
+      total: 17,
+      pct: 10,
+      title: "槓桿反向指數股票型期貨信託基金受益憑證交易檢核表",
+      body: "槓桿型及反向型期貨 ETF 所投資之期貨、衍生性商品或有價證券，如係以外國貨幣交易，除實際交易產生損益外，尚須負擔匯率風險，且投資標的可能因利率、匯率或其他指標之變動，有直接導致本金損失之虞。",
+      correct: "是",
+      feedback: {
+        "是": "以外幣計價交易，除了買賣本身的損益，還要承擔匯率變動風險；利率、匯率等指標的變動確實可能直接侵蝕本金。"
+      }
+    }
+  ];
+
+  var state = { index: 0, selected: null, done: false };
+  var content = document.getElementById("quizContent");
+  var actionBtn = document.getElementById("actionBtn");
+  var scrollArea = document.getElementById("scrollArea");
+
+  function render() {
+    if (state.done) {
+      renderDone();
+      actionBtn.textContent = "重新開始";
+      return;
+    }
+
+    var q = QUESTIONS[state.index];
+    var answered = state.selected !== null;
+    var isCorrect = answered && state.selected === q.correct;
+
+    var html = "";
+    html += '<p class="q-title">' + q.title + "</p>";
+    html += '<p class="q-progress"><span class="num">' + q.n + "</span>/" + q.total + "</p>";
+    html += '<div class="progress-bar"><div class="progress-rail"><div class="progress-track" style="width:' + q.pct + '%"></div></div><span class="progress-pct">' + q.pct + "%</span></div>";
+    html += '<p class="q-body">' + q.body + "</p>";
+
+    ["是", "否"].forEach(function (label) {
+      var cls = "answer-btn";
+      var icon = "";
+      if (answered && state.selected === label) {
+        if (label === q.correct) { cls += " is-correct"; icon = CHECK_ICON; }
+        else { cls += " is-incorrect"; icon = CROSS_ICON; }
+      }
+      var disabledAttr = answered ? "disabled" : "";
+      html += '<button class="' + cls + '" type="button" data-answer="' + label + '" ' + disabledAttr + ">" + label + icon + "</button>";
+    });
+
+    if (answered) {
+      var fbCls = isCorrect ? "feedback is-correct" : "feedback is-incorrect";
+      var titleText = isCorrect ? "正確" : "正確答案是「" + q.correct + "」";
+      var titleIcon = isCorrect ? CHECK_ICON.replace('class="mark"', 'class="mark"') : CROSS_ICON;
+      var bodyText = q.feedback[q.correct];
+      var bodyCls = "feedback-body";
+      if (!bodyText) {
+        bodyText = "（設計稿僅提供「" + q.correct + "」這個作答結果的說明文字，此路徑的詳細解說暫無設計稿內容，故不在此杜撰。）";
+        bodyCls += " is-placeholder";
+      }
+      html += '<div class="' + fbCls + '"><div class="feedback-title">' + titleIcon + "<span>" + titleText + '</span></div><p class="' + bodyCls + '">' + bodyText + "</p></div>";
+    }
+
+    content.innerHTML = html;
+
+    content.querySelectorAll(".answer-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.selected = btn.getAttribute("data-answer");
+        render();
+        scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: "smooth" });
+      });
+    });
+
+    actionBtn.textContent = isCorrect ? "下一題" : "重新作答";
+    actionBtn.disabled = !answered;
+    actionBtn.style.opacity = answered ? "1" : "0.45";
+  }
+
+  function renderDone() {
+    content.innerHTML =
+      '<div class="done-screen">' +
+      '<div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+      "<h3>示範到此，共 2/17 題</h3>" +
+      "<p>完整檢核表共 17 題才能完成簽署，設計稿目前只提供第 1、2 題的文案，所以這個原型只精確還原這兩題的兩種情境，不會虛構後面 15 題的內容。</p>" +
+      "</div>";
+  }
+
+  actionBtn.addEventListener("click", function () {
+    if (actionBtn.disabled) return;
+    var q = QUESTIONS[state.index];
+    var isCorrect = state.selected === q.correct;
+
+    if (state.done) {
+      state.index = 0;
+      state.selected = null;
+      state.done = false;
+      render();
+      return;
+    }
+
+    if (!isCorrect) {
+      state.selected = null;
+      render();
+      return;
+    }
+
+    if (state.index < QUESTIONS.length - 1) {
+      state.index += 1;
+      state.selected = null;
+      render();
+    } else {
+      state.done = true;
+      render();
+    }
+  });
+
+  document.getElementById("backBtn").addEventListener("click", function () {
+    var btn = this;
+    btn.style.transform = "scale(0.9)";
+    setTimeout(function () { btn.style.transform = ""; }, 120);
+  });
+
+  function goScenario(index, answer, scenarioBtnId) {
+    state.index = index;
+    state.selected = answer;
+    state.done = false;
+    render();
+    document.querySelectorAll(".scenario-btn").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+    document.getElementById(scenarioBtnId).setAttribute("aria-pressed", "true");
+  }
+
+  document.getElementById("scenarioCorrect").addEventListener("click", function () {
+    goScenario(0, "否", "scenarioCorrect");
+  });
+  document.getElementById("scenarioWrong").addEventListener("click", function () {
+    goScenario(1, "否", "scenarioWrong");
+  });
+
+  render();
+})();
+</script>
