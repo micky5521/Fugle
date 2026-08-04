@@ -8,11 +8,13 @@
     --bezel-edge: #35322d;
     --surface: #ffffff;
     --surface-variant: #f5f5f5;
+    --surface-disabled: #fafafa;
     --border: #eaeaea;
     --border-heavy: #dfdfdf;
     --ink: #323232;
     --ink-muted: #8b8a8a;
     --ink-faint: #c3c1bd;
+    --ink-disabled: #cccccc;
     --accent: #fa5a00;
     --accent-soft: #fff5f0;
     --accent-ink: #ffffff;
@@ -32,11 +34,13 @@
       --bezel-edge: #232226;
       --surface: #1c1c1e;
       --surface-variant: #0f0f10;
+      --surface-disabled: #0a0a0b;
       --border: #333338;
       --border-heavy: #424248;
       --ink: #f1efec;
       --ink-muted: #9c9a9e;
       --ink-faint: #45444a;
+      --ink-disabled: #3a3940;
       --accent: #ff7a35;
       --accent-soft: rgba(255, 122, 53, 0.16);
       --accent-ink: #1c1c1e;
@@ -56,11 +60,13 @@
     --bezel-edge: #232226;
     --surface: #1c1c1e;
     --surface-variant: #0f0f10;
+    --surface-disabled: #0a0a0b;
     --border: #333338;
     --border-heavy: #424248;
     --ink: #f1efec;
     --ink-muted: #9c9a9e;
     --ink-faint: #45444a;
+    --ink-disabled: #3a3940;
     --accent: #ff7a35;
     --accent-soft: rgba(255, 122, 53, 0.16);
     --accent-ink: #1c1c1e;
@@ -79,11 +85,13 @@
     --bezel-edge: #35322d;
     --surface: #ffffff;
     --surface-variant: #f5f5f5;
+    --surface-disabled: #fafafa;
     --border: #eaeaea;
     --border-heavy: #dfdfdf;
     --ink: #323232;
     --ink-muted: #8b8a8a;
     --ink-faint: #c3c1bd;
+    --ink-disabled: #cccccc;
     --accent: #fa5a00;
     --accent-soft: #fff5f0;
     --accent-ink: #ffffff;
@@ -355,6 +363,11 @@
 
   .answer-btn:disabled { cursor: default; }
 
+  .answer-btn:disabled:not(.is-correct):not(.is-incorrect) {
+    background: var(--surface-disabled);
+    color: var(--ink-disabled);
+  }
+
   .answer-btn.is-correct {
     background: var(--success-bg);
     border-color: var(--success-ink);
@@ -491,10 +504,10 @@
 <div class="studio-tag">
   <span class="eyebrow">互動原型 · Prototype</span>
   <h1>槓桿反向 ETF 交易檢核表</h1>
-  <p>依 Figma 兩個 Section 還原「簽署同意書」檢核表的兩種真實設計行為 — 差異在答錯之後：設計 A 會跳出「重新作答」按鈕才能再選；設計 B 答錯不出現按鈕，「是／否」保持可點，直接重選即可。題目 1、2 內容與說明文字皆取自設計稿。</p>
+  <p>依 Figma 兩個 Section 還原「簽署同意書」檢核表的兩種真實設計行為 — 差異在答錯之後：設計 A 會跳出「重新作答」按鈕才能再選；設計 B 答錯不出現按鈕，「是／否」保持可點，直接重選即可，且未選的另一顆按鈕會呈 disabled 灰階樣式。題目 1、2 內容與說明文字皆取自設計稿。設計 B 已確認為決議版本，預設載入即為此版。</p>
   <div class="scenario-switch">
+    <button class="scenario-btn" type="button" id="modeB">設計 B・答錯免按鈕直接重選 ✅決議版本</button>
     <button class="scenario-btn" type="button" id="modeA">設計 A・需按「重新作答」</button>
-    <button class="scenario-btn" type="button" id="modeB">設計 B・答錯免按鈕直接重選</button>
   </div>
 </div>
 
@@ -563,8 +576,9 @@
 
   // 兩個 Figma section 的真實差異只在「答錯之後」：
   // 設計 A (17640-17653)：答錯會出現「重新作答」按鈕，按下才能重選；作答按鈕答完即鎖定。
-  // 設計 B (17640-17654)：答錯完全不出現底部按鈕，「是／否」保持可點，直接點其他選項即可重選；只有答對才會出現「下一題」。
-  var state = { mode: "A", index: 0, selected: null, done: false };
+  // 設計 B (17640-17654)：答錯完全不出現底部按鈕，「是／否」保持可點，直接點其他選項即可重選；只有答對才會出現「下一題」，
+  //   且未選的另一顆按鈕會呈現 disabled 灰階樣式 (bg #fafafa／文字 #ccc)。已確認為決議版本，預設載入即為此版。
+  var state = { mode: "B", index: 0, selected: null, done: false };
   var content = document.getElementById("quizContent");
   var actionBar = document.querySelector(".action-bar");
   var actionBtn = document.getElementById("actionBtn");
@@ -687,7 +701,7 @@
   document.getElementById("modeA").addEventListener("click", function () { setMode("A", "modeA"); });
   document.getElementById("modeB").addEventListener("click", function () { setMode("B", "modeB"); });
 
-  document.getElementById("modeA").setAttribute("aria-pressed", "true");
+  document.getElementById("modeB").setAttribute("aria-pressed", "true");
   render();
 })();
 </script>
