@@ -1,0 +1,2030 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>吉盈 App｜精選輯圖表互動模擬</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="吉盈 App｜精選輯圖表互動模擬" data-srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;吉盈 App｜精選輯圖表互動模擬&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;codex-visualization-widget-state&quot;&gt;__CODEX_VISUALIZATION_WIDGET_STATE__&lt;/script&gt;
+&lt;script&gt;(() =&gt; {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia(&quot;(prefers-color-scheme: dark)&quot;);
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const hasOwn = Object.hasOwn;
+  const parentWindow = globalThis.parent;
+  const stringify = JSON.stringify;
+  const parse = JSON.parse;
+  const encode = TextEncoder.prototype.encode.bind(new TextEncoder());
+  const initialStateElement = document.getElementById(
+    &quot;codex-visualization-widget-state&quot;,
+  );
+  const initialGlobals = parse(initialStateElement?.textContent ?? &quot;{}&quot;);
+  initialStateElement?.remove();
+  /** @type {Record&lt;string, unknown&gt; | null} */
+  let state = initialGlobals.widgetState ?? null;
+  const statePersistence = initialGlobals.statePersistence ?? &quot;none&quot;;
+  let nextStateRequestId = 0;
+  /** @type {Map&lt;number, { resolve: () =&gt; void; reject: (error: Error) =&gt; void; timeout: ReturnType&lt;typeof globalThis.setTimeout&gt;; serializedState: string }&gt;} */
+  const pendingStateWrites = new Map();
+  const persistenceError = () =&gt;
+    Object.assign(
+      new Error(&quot;The host could not persist the widget state update&quot;),
+      {
+        code: -32000,
+        data: { code: &quot;widget_state_persistence_failed&quot;, retryable: false },
+      },
+    );
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) =&gt; {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, &quot;data&quot;);
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, &quot;ports&quot;);
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, &quot;source&quot;);
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) =&gt; {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;open-external&quot;, { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;follow-up&quot;, { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  /**
+   * @param {Record&lt;string, unknown&gt; | ((previous: Record&lt;string, unknown&gt; | null) =&gt; Record&lt;string, unknown&gt;)} next
+   * @returns {Promise&lt;void&gt;}
+   */
+  const setWidgetState = async (next) =&gt; {
+    const nextState = typeof next === &quot;function&quot; ? next(state) : next;
+    if (
+      nextState == null ||
+      typeof nextState !== &quot;object&quot; ||
+      isArray(nextState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const inputState = stringify(
+      nextState,
+      (_key, /** @type {unknown} */ value) =&gt; {
+        if (
+          typeof value === &quot;undefined&quot; ||
+          typeof value === &quot;function&quot; ||
+          typeof value === &quot;symbol&quot; ||
+          (typeof value === &quot;number&quot; &amp;&amp; !Number.isFinite(value))
+        ) {
+          throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+        }
+        return value;
+      },
+    );
+    const parsedState = parse(inputState);
+    if (
+      parsedState == null ||
+      typeof parsedState !== &quot;object&quot; ||
+      isArray(parsedState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const storedState = {
+      modelContent: null,
+      privateContent: null,
+      ...parsedState,
+    };
+    const serializedState = stringify(storedState);
+    if (encode(serializedState).length &gt; 16 * 1024) {
+      throw new TypeError(
+        &quot;Widget state must be a JSON object of at most 16 KiB&quot;,
+      );
+    }
+    if (
+      hasOwn(storedState, &quot;imageIds&quot;) &amp;&amp;
+      (!isArray(storedState.imageIds) ||
+        storedState.imageIds.some(
+          (/** @type {unknown} */ id) =&gt; typeof id !== &quot;string&quot;,
+        ))
+    ) {
+      throw new TypeError(&quot;Widget state imageIds must be an array of strings&quot;);
+    }
+    if (storedState.imageIds?.length &gt; 0) {
+      throw Object.assign(
+        new TypeError(&quot;Visualization state does not support image attachments&quot;),
+        { code: -32602, data: { code: &quot;images_unsupported&quot; } },
+      );
+    }
+    state = storedState;
+    globalThis.openai.widgetState = state;
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: { widgetState: state } },
+      }),
+    );
+    if (statePersistence === &quot;none&quot;) {
+      throw persistenceError();
+    }
+    const id = ++nextStateRequestId;
+    return new Promise((resolve, reject) =&gt; {
+      const timeout = globalThis.setTimeout(() =&gt; {
+        pendingStateWrites.delete(id);
+        reject(persistenceError());
+      }, 30_000);
+      pendingStateWrites.set(id, { resolve, reject, timeout, serializedState });
+      postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+    });
+  };
+  const syncTheme = () =&gt; {
+    const theme = mediaQuery.matches ? &quot;dark&quot; : &quot;light&quot;;
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      openExternal,
+      sendFollowUpMessage,
+      setWidgetState,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+      widgetState: state,
+      statePersistence,
+      stateModelContext: &quot;none&quot;,
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () =&gt; {
+    postToHost(&quot;height&quot;, {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    &quot;message&quot;,
+    (event) =&gt; {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        hostPort != null ||
+        source !== parentWindow ||
+        typeof data !== &quot;object&quot; ||
+        data?.type !== &quot;codex-visualization-initialize&quot; ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          &quot;message&quot;,
+          (event) =&gt; {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === &quot;object&quot; &amp;&amp; data?.type === &quot;measure&quot;) {
+              sendHeight();
+            } else if (
+              typeof data === &quot;object&quot; &amp;&amp;
+              data?.type === &quot;widget-state-result&quot;
+            ) {
+              /** @type {unknown} */
+              const id = data.id;
+              if (typeof id !== &quot;number&quot;) {
+                return;
+              }
+              const pending = pendingStateWrites.get(id);
+              if (pending != null) {
+                pendingStateWrites.delete(id);
+                globalThis.clearTimeout(pending.timeout);
+                if (data.ok === true) {
+                  pending.resolve();
+                } else {
+                  pending.reject(persistenceError());
+                }
+              }
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      for (const [id, { serializedState }] of pendingStateWrites) {
+        postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+      }
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener(&quot;change&quot;, syncTheme);
+  globalThis.addEventListener(&quot;click&quot;, (event) =&gt; {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest(&quot;a[href]&quot;);
+    const href = link?.getAttribute(&quot;href&quot;);
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith(&quot;#&quot;)) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost(&quot;scroll-to&quot;, {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+&lt;/script&gt;
+&lt;div id=&quot;demo-page&quot;&gt;
+ &lt;div class=&quot;demo-heading&quot;&gt;
+  &lt;a href=&quot;../index.html&quot; target=&quot;_top&quot;&gt;← 原型總覽&lt;/a&gt;
+  &lt;p class=&quot;demo-kicker&quot;&gt;吉盈 App · Interaction demo&lt;/p&gt;
+  &lt;h1&gt;精選輯圖表互動模擬&lt;/h1&gt;
+  &lt;p&gt;點擊期間 Tab，或在圖表區左右滑動，體驗輕量的切換動畫。&lt;/p&gt;
+ &lt;/div&gt;
+ &lt;div class=&quot;demo-layout&quot;&gt;
+&lt;div id=&quot;market-motion&quot;&gt;
+ &lt;div class=&quot;phone&quot;&gt;
+  &lt;header&gt;&lt;span&gt;庫存&lt;/span&gt;&lt;strong&gt;精選吉&lt;/strong&gt;&lt;span class=&quot;bell&quot;&gt;&lt;i data-lucide=&quot;bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/header&gt;
+  &lt;div class=&quot;metrics&quot;&gt;&lt;div&gt;&lt;small&gt;近 3 個月&lt;/small&gt;&lt;b&gt;+ 17.14%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;small&gt;近 6 個月&lt;/small&gt;&lt;b&gt;+ 24.32%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;small&gt;近 1 年&lt;/small&gt;&lt;b&gt;+ 28.59%&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;tabs&quot; role=&quot;tablist&quot; aria-label=&quot;圖表期間&quot;&gt;
+   &lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;m5D&quot; aria-controls=&quot;market-panel&quot; aria-selected=&quot;false&quot; class=&quot;cursor-interaction&quot;&gt;5D&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;m10D&quot; aria-controls=&quot;market-panel&quot; aria-selected=&quot;false&quot; class=&quot;cursor-interaction&quot;&gt;10D&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;m20D&quot; aria-controls=&quot;market-panel&quot; aria-selected=&quot;false&quot; class=&quot;cursor-interaction&quot;&gt;20D&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;m60D&quot; aria-controls=&quot;market-panel&quot; aria-selected=&quot;true&quot; class=&quot;cursor-interaction&quot;&gt;60D&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;m120D&quot; aria-controls=&quot;market-panel&quot; aria-selected=&quot;false&quot; class=&quot;cursor-interaction&quot;&gt;120D&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;m1Y&quot; aria-controls=&quot;market-panel&quot; aria-selected=&quot;false&quot; class=&quot;cursor-interaction&quot;&gt;1Y&lt;/button&gt;
+   &lt;span class=&quot;indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;market-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;m60D&quot;&gt;
+   &lt;div class=&quot;legend&quot;&gt;&lt;span&gt;&lt;i class=&quot;dot&quot;&gt;&lt;/i&gt;總報酬率 &lt;b id=&quot;portfolio-value&quot;&gt;+27.7%&lt;/b&gt;&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;dot benchmark&quot;&gt;&lt;/i&gt;大盤走勢 &lt;b id=&quot;market-value&quot;&gt;+24.6%&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+   &lt;div class=&quot;chart&quot;&gt;&lt;svg role=&quot;img&quot; aria-label=&quot;所選期間報酬率示意圖，橘線為投資組合，灰線為大盤；可左右滑動切換期間&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
+   &lt;div class=&quot;foot&quot;&gt;&lt;span&gt;最近更新 05/20&lt;/span&gt;&lt;span&gt;查看歷史紀錄 ›&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;section class=&quot;stocks&quot;&gt;&lt;h3&gt;六月精選吉 &lt;span&gt;10 檔&lt;/span&gt;&lt;/h3&gt;&lt;div class=&quot;stock&quot;&gt;&lt;div&gt;台積電&lt;small&gt;2330 TT&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;price&quot;&gt;2465.00&lt;small&gt;+20.00 · 0.82%&lt;/small&gt;&lt;/div&gt;&lt;span class=&quot;spark&quot;&gt;╱╲╱╱╲╱&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;stock&quot;&gt;&lt;div&gt;元大台灣50&lt;small&gt;0050 ETF&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;price down&quot;&gt;108.25&lt;small&gt;−0.10 · 0.09%&lt;/small&gt;&lt;/div&gt;&lt;span class=&quot;spark down&quot;&gt;╲╱╲╲╱╱&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;stock&quot;&gt;&lt;div&gt;鴻海&lt;small&gt;2317 TT&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;price&quot;&gt;130.50&lt;small&gt;+3.00 · 2.36%&lt;/small&gt;&lt;/div&gt;&lt;span class=&quot;spark&quot;&gt;╱╱╲╱╱╲&lt;/span&gt;&lt;/div&gt;&lt;/section&gt;
+  &lt;footer&gt;左右滑動切換期間 · 示意資料&lt;/footer&gt;&lt;span class=&quot;sr-status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+#market-motion {color-scheme:light dark;font:14px/1.5 -apple-system,BlinkMacSystemFont,&quot;Noto Sans TC&quot;,sans-serif;color:light-dark(#303030,#ececec);--paper:light-dark(#fff,#191919);--soft:light-dark(#f7f7f7,#242424);--grid:light-dark(#ececec,#303030);--muted:light-dark(#8b8a8a,#aaa);--orange:#fa5a00;--red:light-dark(#ff403e,#ff7773);--green:light-dark(#60a52d,#8aca58);padding:16px 0}
+#market-motion *{box-sizing:border-box}#market-motion .phone{max-width:402px;margin:auto;background:var(--paper);border-radius:24px;overflow:hidden;box-shadow:0 8px 32px #0000000b;border:1px solid var(--grid)}
+#market-motion header{display:flex;align-items:center;gap:12px;padding:24px 18px 18px;border-bottom:1px solid var(--grid);font-weight:600}#market-motion header strong{color:var(--orange)}#market-motion .bell{margin-left:auto;display:flex}#market-motion .bell svg{width:16px;height:16px}
+#market-motion .metrics{display:flex;margin:14px 16px 4px;background:var(--soft);border-radius:6px;padding:12px 0}#market-motion .metrics&gt;div{flex:1;text-align:center;border-right:1px solid var(--grid)}#market-motion .metrics&gt;div:last-child{border:0}#market-motion small{display:block;color:var(--muted);font-size:11px;font-weight:400}#market-motion .metrics b{display:block;color:var(--red);font-size:14px;margin-top:3px;font-weight:500;font-variant-numeric:tabular-nums}
+#market-motion .tabs{position:relative;display:flex;margin:4px 16px 0;border-bottom:1px solid var(--grid)}#market-motion .tabs button{flex:1;min-width:0;height:44px;padding:0;border:0;background:transparent;color:var(--muted);font:inherit;font-size:12px;transition:color 180ms;border-radius:5px 5px 0 0}#market-motion .tabs button[aria-selected=true]{color:inherit}#market-motion .indicator{position:absolute;bottom:-1px;left:0;height:2px;background:var(--orange);border-radius:2px;transition:transform 250ms cubic-bezier(.22,1,.36,1),width 250ms cubic-bezier(.22,1,.36,1);pointer-events:none}
+#market-motion .legend{display:flex;justify-content:space-between;gap:6px;padding:13px 16px 9px;font-size:11px}#market-motion .legend&gt;span{display:flex;align-items:center;gap:5px;white-space:nowrap}#market-motion .legend b{font-weight:500;font-variant-numeric:tabular-nums}#market-motion .dot{width:13px;height:3px;background:var(--orange);border-radius:3px}#market-motion .dot.benchmark{background:var(--muted)}#market-motion .chart{touch-action:pan-y;user-select:none;position:relative;margin:0 16px;height:220px}#market-motion .chart svg{display:block;width:100%;height:100%;overflow:visible}#market-motion .chart text{fill:var(--muted);font:10px -apple-system,sans-serif}#market-motion .foot{margin:8px 16px 16px;padding:5px 8px;background:var(--soft);border-radius:4px;display:flex;justify-content:space-between;color:var(--muted);font-size:10px}
+#market-motion .stocks{padding:16px;border-top:8px solid var(--soft)}#market-motion h3{font-size:13px;margin:0 0 7px;font-weight:600}#market-motion h3 span{font-weight:400;color:var(--muted);font-size:11px;margin-left:5px}#market-motion .stock{display:flex;align-items:center;padding:8px 0;border-bottom:1px solid var(--grid)}#market-motion .stock:last-child{border:0}#market-motion .price{margin-left:auto;text-align:right;color:var(--red);font-variant-numeric:tabular-nums}#market-motion .price small{color:inherit}#market-motion .spark{color:var(--red);width:66px;margin-left:10px;font-size:17px;letter-spacing:-3px}#market-motion .down{color:var(--green)}#market-motion footer{padding:0 16px 16px;text-align:center;color:var(--muted);font-size:10px}#market-motion .sr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(prefers-reduced-motion:reduce){#market-motion .indicator,#market-motion .tabs button{transition:none}}
+&lt;/style&gt;
+&lt;script&gt;
+(()=&gt;{
+const root=document.getElementById(&#x27;market-motion&#x27;),tabs=[...root.querySelectorAll(&#x27;[role=tab]&#x27;)],svg=root.querySelector(&#x27;.chart svg&#x27;),chart=root.querySelector(&#x27;.chart&#x27;),indicator=root.querySelector(&#x27;.indicator&#x27;),panel=root.querySelector(&#x27;[role=tabpanel]&#x27;);
+const periods=[&#x27;5D&#x27;,&#x27;10D&#x27;,&#x27;20D&#x27;,&#x27;60D&#x27;,&#x27;120D&#x27;,&#x27;1Y&#x27;];
+const config={ &#x27;5D&#x27;:[3.24,1.89,&#x27;05/14&#x27;,&#x27;05/16&#x27;,&#x27;05/20&#x27;], &#x27;10D&#x27;:[5.68,3.92,&#x27;05/07&#x27;,&#x27;05/13&#x27;,&#x27;05/20&#x27;], &#x27;20D&#x27;:[9.46,7.12,&#x27;04/22&#x27;,&#x27;05/06&#x27;,&#x27;05/20&#x27;], &#x27;60D&#x27;:[27.7,24.6,&#x27;02/20&#x27;,&#x27;04/05&#x27;,&#x27;05/20&#x27;], &#x27;120D&#x27;:[24.32,18.74,&#x27;11/20&#x27;,&#x27;02/20&#x27;,&#x27;05/20&#x27;], &#x27;1Y&#x27;:[28.59,21.43,&#x27;2023/05&#x27;,&#x27;2023/11&#x27;,&#x27;2024/05&#x27;]};
+let selected=&#x27;60D&#x27;,raf=0,run=0,animations=[],finishTimer=0;
+const ns=&#x27;http://www.w3.org/2000/svg&#x27;,make=(tag,attrs,parent=svg)=&gt;{const n=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=&gt;n.setAttribute(k,v));parent.appendChild(n);return n};
+const motionPreference=matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;);
+const reduce=()=&gt;motionPreference.matches;
+function series(key){const [a,b]=config[key],seed=periods.indexOf(key)+1;return Array.from({length:45},(_,i)=&gt;{const t=i/44,noise=(Math.sin(i*1.76+seed)*.042+Math.sin(i*.48+seed)*.11)*Math.sin(Math.PI*t);return {a:a*(t+noise+.09*Math.sin(t*11)*Math.sin(Math.PI*t)),b:b*(t+noise*.65+.07*Math.sin(t*9+1)*Math.sin(Math.PI*t))}})}
+function moveIndicator(){const b=tabs[periods.indexOf(selected)];indicator.style.width=(b.offsetWidth-16)+&#x27;px&#x27;;indicator.style.transform=&#x27;translateX(&#x27;+(b.offsetLeft+8)+&#x27;px)&#x27;}
+function draw(animate){cancelAnimationFrame(raf);clearTimeout(finishTimer);run++;const ticket=run;animations.forEach(a=&gt;a.cancel());animations=[];svg.replaceChildren();const w=chart.clientWidth,h=220,left=0,right=w-43,top=9,bottom=190,data=series(selected),values=data.flatMap(d=&gt;[d.a,d.b]),min=Math.min(...values,0),max=Math.max(...values)*1.13;const x=i=&gt;left+i/44*(right-left),y=v=&gt;bottom-(v-min)/(max-min)*(bottom-top);svg.setAttribute(&#x27;viewBox&#x27;,`0 0 ${w} ${h}`);
+for(let i=0;i&lt;5;i++){const v=min+(max-min)*i/4,Y=y(v);make(&#x27;line&#x27;,{x1:left,x2:right,y1:Y,y2:Y,stroke:&#x27;var(--grid)&#x27;,&#x27;stroke-width&#x27;:.7});const text=make(&#x27;text&#x27;,{x:right+7,y:Y+3});text.textContent=(v&gt;0?&#x27;+&#x27;:&#x27;&#x27;)+v.toFixed(1)+&#x27;%&#x27;}
+for(let i=0;i&lt;7;i++)make(&#x27;line&#x27;,{x1:right*i/6,x2:right*i/6,y1:top,y2:bottom,stroke:&#x27;var(--grid)&#x27;,&#x27;stroke-width&#x27;:.7});
+config[selected].slice(2).forEach((label,i)=&gt;{const text=make(&#x27;text&#x27;,{x:right*i/2,y:211,&#x27;text-anchor&#x27;:i===0?&#x27;start&#x27;:i===2?&#x27;end&#x27;:&#x27;middle&#x27;});text.textContent=label});
+const defs=make(&#x27;defs&#x27;,{});const gradient=make(&#x27;linearGradient&#x27;,{id:&#x27;market-fill-gradient&#x27;,x1:0,y1:0,x2:0,y2:1},defs);make(&#x27;stop&#x27;,{offset:&#x27;0%&#x27;,&#x27;stop-color&#x27;:&#x27;var(--orange)&#x27;,&#x27;stop-opacity&#x27;:&#x27;.13&#x27;},gradient);make(&#x27;stop&#x27;,{offset:&#x27;100%&#x27;,&#x27;stop-color&#x27;:&#x27;var(--orange)&#x27;,&#x27;stop-opacity&#x27;:&#x27;0&#x27;},gradient);
+const group=make(&#x27;g&#x27;,{}),path=k=&gt;data.map((d,i)=&gt;(i?&#x27;L&#x27;:&#x27;M&#x27;)+x(i).toFixed(2)+&#x27;,&#x27;+y(d[k]).toFixed(2)).join(&#x27; &#x27;);
+const area=make(&#x27;path&#x27;,{d:path(&#x27;a&#x27;)+` L${right},${bottom} L0,${bottom} Z`,fill:&#x27;url(#market-fill-gradient)&#x27;},group);const marketLine=make(&#x27;path&#x27;,{d:path(&#x27;b&#x27;),fill:&#x27;none&#x27;,stroke:&#x27;var(--muted)&#x27;,&#x27;stroke-width&#x27;:1.3,&#x27;stroke-linejoin&#x27;:&#x27;round&#x27;,&#x27;stroke-linecap&#x27;:&#x27;round&#x27;},group);const portfolioLine=make(&#x27;path&#x27;,{d:path(&#x27;a&#x27;),fill:&#x27;none&#x27;,stroke:&#x27;var(--orange)&#x27;,&#x27;stroke-width&#x27;:1.9,&#x27;stroke-linejoin&#x27;:&#x27;round&#x27;,&#x27;stroke-linecap&#x27;:&#x27;round&#x27;},group);
+const tip=make(&#x27;circle&#x27;,{cx:right,cy:y(data[44].a),r:2.8,fill:&#x27;var(--orange)&#x27;,opacity:animate?0:1});const aEl=root.querySelector(&#x27;#portfolio-value&#x27;),bEl=root.querySelector(&#x27;#market-value&#x27;);aEl.textContent=&#x27;+&#x27;+config[selected][0].toFixed(2)+&#x27;%&#x27;;bEl.textContent=&#x27;+&#x27;+config[selected][1].toFixed(2)+&#x27;%&#x27;;
+function paintProgress(p){
+ const pos=Math.max(0,Math.min(44,p*44)),j=Math.floor(pos),next=Math.min(j+1,44),fraction=pos-j;
+ const endpoint={a:data[j].a+(data[next].a-data[j].a)*fraction,b:data[j].b+(data[next].b-data[j].b)*fraction};
+ const partial=k=&gt;data.slice(0,j+1).map((d,i)=&gt;(i?&#x27;L&#x27;:&#x27;M&#x27;)+x(i).toFixed(2)+&#x27;,&#x27;+y(d[k]).toFixed(2)).join(&#x27; &#x27;)+(fraction?&#x27; L&#x27;+x(pos).toFixed(2)+&#x27;,&#x27;+y(endpoint[k]).toFixed(2):&#x27;&#x27;);
+ const d=partial(&#x27;a&#x27;);portfolioLine.setAttribute(&#x27;d&#x27;,d);marketLine.setAttribute(&#x27;d&#x27;,partial(&#x27;b&#x27;));area.setAttribute(&#x27;d&#x27;,d+` L${x(pos)},${bottom} L0,${bottom} Z`);
+ tip.setAttribute(&#x27;cx&#x27;,x(pos));tip.setAttribute(&#x27;cy&#x27;,y(endpoint.a));tip.setAttribute(&#x27;opacity&#x27;,Math.min(1,p*8));
+}
+if(animate&amp;&amp;!reduce()){
+ animations.push(root.querySelector(&#x27;.legend&#x27;).animate([{opacity:.35,transform:&#x27;translateY(2px)&#x27;},{opacity:1,transform:&#x27;translateY(0)&#x27;}],{duration:240,easing:&#x27;cubic-bezier(.22,1,.36,1)&#x27;}));
+ paintProgress(.015);let start=null;
+ function step(now){if(ticket!==run)return;if(start===null)start=now;const t=Math.min(1,Math.max(0,(now-start)/480));paintProgress(1-Math.pow(1-t,2));if(t&lt;1)raf=requestAnimationFrame(step);else clearTimeout(finishTimer)}
+ raf=requestAnimationFrame(step);
+ finishTimer=setTimeout(()=&gt;{if(ticket===run){cancelAnimationFrame(raf);paintProgress(1)}},750);
+}else paintProgress(1);
+}
+function select(key,animate=true){if(!periods.includes(key)||(animate&amp;&amp;key===selected))return;selected=key;tabs.forEach(b=&gt;b.setAttribute(&#x27;aria-selected&#x27;,String(b.textContent===key)));panel.setAttribute(&#x27;aria-labelledby&#x27;,&#x27;m&#x27;+key);moveIndicator();draw(animate);root.querySelector(&#x27;.sr-status&#x27;).textContent=key+&#x27;，報酬率 &#x27;+config[key][0]+&#x27;%，示意資料&#x27;}
+tabs.forEach((b,i)=&gt;{b.addEventListener(&#x27;click&#x27;,()=&gt;{if(b.textContent!==selected)select(b.textContent)});b.addEventListener(&#x27;keydown&#x27;,e=&gt;{if(![&#x27;ArrowLeft&#x27;,&#x27;ArrowRight&#x27;,&#x27;Home&#x27;,&#x27;End&#x27;].includes(e.key))return;e.preventDefault();const next=e.key===&#x27;Home&#x27;?0:e.key===&#x27;End&#x27;?5:(i+(e.key===&#x27;ArrowRight&#x27;?1:5))%6;tabs[next].focus();select(periods[next])})});
+let swipe=null;
+chart.addEventListener(&#x27;pointerdown&#x27;,e=&gt;{if(e.pointerType===&#x27;mouse&#x27;&amp;&amp;e.button!==0)return;swipe={id:e.pointerId,x:e.clientX,y:e.clientY,time:performance.now()};chart.setPointerCapture(e.pointerId)});
+chart.addEventListener(&#x27;pointerup&#x27;,e=&gt;{if(!swipe||swipe.id!==e.pointerId)return;const dx=e.clientX-swipe.x,dy=e.clientY-swipe.y,dt=performance.now()-swipe.time;swipe=null;if(chart.hasPointerCapture(e.pointerId))chart.releasePointerCapture(e.pointerId);if(Math.abs(dx)&gt;Math.abs(dy)*1.25&amp;&amp;(Math.abs(dx)&gt;46||(Math.abs(dx)&gt;24&amp;&amp;dt&lt;220))){const next=Math.max(0,Math.min(periods.length-1,periods.indexOf(selected)+(dx&lt;0?1:-1)));if(periods[next]!==selected)select(periods[next]);}});
+chart.addEventListener(&#x27;pointercancel&#x27;,()=&gt;{swipe=null});
+let wheelDistance=0,wheelLast=0,wheelCommitted=false;
+chart.addEventListener(&#x27;wheel&#x27;,e=&gt;{
+ const dx=e.deltaX,dy=e.deltaY;if(Math.abs(dx)&lt;=Math.abs(dy)||Math.abs(dx)&lt;.5)return;
+ e.preventDefault();const now=performance.now();if(now-wheelLast&gt;180){wheelDistance=0;wheelCommitted=false}wheelLast=now;
+ if(wheelCommitted)return;wheelDistance+=dx*(e.deltaMode===1?16:e.deltaMode===2?chart.clientWidth:1);
+ if(Math.abs(wheelDistance)&gt;=40){wheelCommitted=true;const next=Math.max(0,Math.min(5,periods.indexOf(selected)+(wheelDistance&gt;0?1:-1)));if(periods[next]!==selected)select(periods[next]);}
+},{passive:false});
+chart.addEventListener(&#x27;lostpointercapture&#x27;,()=&gt;{swipe=null});
+indicator.style.transition=&#x27;none&#x27;;select(&#x27;60D&#x27;,false);indicator.getBoundingClientRect();indicator.style.transition=&#x27;&#x27;;
+motionPreference.addEventListener(&#x27;change&#x27;,()=&gt;{moveIndicator();draw(false)});
+let lastWidth=chart.clientWidth;new ResizeObserver(()=&gt;{moveIndicator();const width=chart.clientWidth;if(width&gt;0&amp;&amp;Math.abs(width-lastWidth)&gt;.5){lastWidth=width;draw(false)}}).observe(chart);
+})();
+&lt;/script&gt;
+ &lt;aside class=&quot;demo-specs&quot; aria-labelledby=&quot;motion-spec-title&quot;&gt;
+  &lt;h2 id=&quot;motion-spec-title&quot;&gt;動態規格&lt;/h2&gt;
+  &lt;p class=&quot;demo-note&quot;&gt;此 demo 僅保留下列六項互動。圖表與報酬為示意資料，非即時行情。&lt;/p&gt;
+  &lt;ol&gt;
+   &lt;li&gt;&lt;h3&gt;Tab 點擊後，底線平滑移動 &lt;span&gt;250ms&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;橘色底線從目前位置移到選中的 Tab。&lt;/li&gt;&lt;li&gt;時長 250ms，先快後慢，沒有彈跳。&lt;/li&gt;&lt;li&gt;重複點擊已選中的 Tab，不重播動畫。&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;h3&gt;Tab 文字與按壓回饋 &lt;span&gt;180ms&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;選中與未選中文字顏色以 180ms 過渡。&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;h3&gt;圖表曲線由左向右長出 &lt;span&gt;480ms&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;切換期間後，投資組合與大盤曲線同步逐段繪製。&lt;/li&gt;&lt;li&gt;時長約 480ms，前段較快、尾段緩緩完成。&lt;/li&gt;&lt;li&gt;橘色端點沿曲線前進，下方淡橘色面積同步展開。&lt;/li&gt;&lt;li&gt;格線保持穩定；座標標籤直接更新，不做位移動畫。&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;h3&gt;報酬數值淡入 &lt;span&gt;240ms&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;切換後，圖例與報酬數值從 35% 透明度 → 完全顯示。&lt;/li&gt;&lt;li&gt;同時由下方 2px 回到原位，時長 240ms。&lt;/li&gt;&lt;li&gt;數字直接替換，不做跳數或滾動。&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;h3&gt;左右滑動切換期間&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;在圖表區左滑到下一個 Tab，右滑回上一個。&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;h3&gt;快速操作與防卡住 &lt;span&gt;750ms&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;連續切換時取消上一段動畫，以最後選中的期間為準。&lt;/li&gt;&lt;li&gt;若動畫未正常結束，會在 750ms 補上完整曲線。&lt;/li&gt;&lt;li&gt;初次開啟直接顯示完整圖表；系統啟用「減少動態效果」時，切換也直接完成。&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+ &lt;/aside&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+#demo-page{font:14px/1.7 -apple-system,BlinkMacSystemFont,&quot;PingFang TC&quot;,&quot;Noto Sans TC&quot;,sans-serif;color:light-dark(#303030,#eee);padding:24px 16px 48px;max-width:1060px;margin:auto;color-scheme:light dark}
+#demo-page .demo-heading{margin-bottom:24px}#demo-page .demo-heading a{color:light-dark(#766f68,#b9b2aa);font-size:12px;text-decoration:none}#demo-page .demo-kicker{color:#fa5a00;letter-spacing:.1em;font-size:11px;margin:24px 0 6px}#demo-page h1{font-size:26px;line-height:1.3;margin:0 0 10px;font-weight:600}#demo-page .demo-heading&gt;p:last-child{color:light-dark(#777,#aaa);margin:0;font-size:13px}
+#demo-page .demo-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:start}#demo-page #market-motion{padding:0;min-width:0}#demo-page .demo-specs{min-width:0}#demo-page .demo-specs h2{font-size:18px;margin:0 0 6px}#demo-page .demo-note{font-size:12px;color:light-dark(#777,#aaa);margin:0 0 20px}#demo-page .demo-specs&gt;ol{padding-left:22px;margin:0}#demo-page .demo-specs&gt;ol&gt;li{padding:0 0 18px 3px}#demo-page .demo-specs h3{font-size:14px;font-weight:600;margin:0 0 7px}#demo-page .demo-specs h3 span{display:inline-block;color:#fa5a00;font-size:11px;font-weight:500;margin-left:6px}#demo-page .demo-specs ul{padding-left:17px;font-size:12px;color:light-dark(#666,#bbb)}#demo-page .demo-specs ul li{margin-bottom:4px}
+@media(min-width:700px){#demo-page .demo-layout{grid-template-columns:minmax(300px,402px) minmax(0,1fr);gap:36px}}
+&lt;/style&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (event) =&gt; {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest(&quot;[data-tooltip]&quot;);
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) =&gt; {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) =&gt; {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll(&quot;*&quot;)) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) =&gt; {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) =&gt; {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host &amp;&amp; !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger &amp;&amp; !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () =&gt; {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
+    tooltip = null;
+  };
+
+  // Events between children of one shadow root never reach the document.
+  listen(document);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<script>(() => {
+  const frame = document.getElementById("codex-visualization");
+  if (!(frame instanceof HTMLIFrameElement)) {
+    return;
+  }
+  let viewportHeight = globalThis.innerHeight;
+  const storageKey = `codex:visualization-widget-state-v2:${JSON.stringify([
+    globalThis.location.pathname,
+    globalThis.location.search,
+  ])}`;
+  const parseState = (serializedState) => {
+    if (
+      typeof serializedState !== "string" ||
+      new TextEncoder().encode(serializedState).length > 16 * 1024
+    ) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    /** @type {unknown} */
+    const state = JSON.parse(serializedState);
+    if (
+      state == null ||
+      typeof state !== "object" ||
+      Array.isArray(state) ||
+      ("imageIds" in state &&
+        (!Array.isArray(state.imageIds) || state.imageIds.length > 0))
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const storedState = { modelContent: null, privateContent: null, ...state };
+    const canonicalState = JSON.stringify(
+      storedState,
+      (_key, /** @type {unknown} */ value) => {
+        if (typeof value === "number" && !Number.isFinite(value)) {
+          throw new TypeError("Widget state must contain finite numbers");
+        }
+        return value;
+      },
+    );
+    if (new TextEncoder().encode(canonicalState).length > 16 * 1024) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    return storedState;
+  };
+  let storage = null;
+  let state = null;
+  try {
+    const localStorage = globalThis.localStorage;
+    const probeKey = `${storageKey}:probe`;
+    localStorage.setItem(probeKey, "1");
+    localStorage.removeItem(probeKey);
+    storage = localStorage;
+    const savedState = storage.getItem(storageKey);
+    if (savedState != null) {
+      try {
+        state = parseState(savedState);
+      } catch {
+        // Invalid saved state does not disable future writes.
+      }
+    }
+  } catch {
+    storage = null;
+  }
+  const initialGlobals = {
+    widgetState: state,
+    statePersistence: storage == null ? "none" : "local",
+  };
+
+  const channel = new MessageChannel();
+  channel.port1.addEventListener("message", (event) => {
+    const data = event.data;
+    if (typeof data !== "object" || data == null) {
+      return;
+    }
+    if (data.type === "widget-state-write") {
+      if (!Number.isSafeInteger(data.id) || data.id <= 0) {
+        return;
+      }
+      let ok = false;
+      try {
+        if (storage != null) {
+          const state = parseState(data.state);
+          storage.setItem(storageKey, JSON.stringify(state));
+          ok = true;
+        }
+      } catch {
+        // Storage denial, quota limits, and invalid state return a failed receipt.
+      }
+      channel.port1.postMessage({
+        type: "widget-state-result",
+        id: data.id,
+        ok,
+      });
+      return;
+    }
+    if (data.type === "height") {
+      const height = data.height;
+      if (
+        typeof height === "number" &&
+        Number.isFinite(height) &&
+        height >= 0 &&
+        height <= 10_000
+      ) {
+        frame.style.height = Math.ceil(height) + "px";
+      }
+      return;
+    }
+    if (data.type === "scroll-to") {
+      const top = data.top;
+      if (
+        typeof top === "number" &&
+        Number.isFinite(top) &&
+        top >= 0 &&
+        globalThis.navigator.userActivation?.isActive === true
+      ) {
+        globalThis.scrollTo({
+          top: Math.ceil(
+            globalThis.scrollY + frame.getBoundingClientRect().top + top,
+          ),
+        });
+      }
+      return;
+    }
+    if (data.type === "open-external") {
+      const rawHref = data.href;
+      if (typeof rawHref !== "string") {
+        return;
+      }
+      let href;
+      try {
+        const url = new URL(rawHref, document.baseURI);
+        if (url.protocol !== "https:") {
+          return;
+        }
+        href = url.href;
+      } catch {
+        return;
+      }
+      if (globalThis.navigator.userActivation?.isActive === true) {
+        const anchor = document.createElement("a");
+        anchor.href = href;
+        anchor.rel = "noopener noreferrer";
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+      }
+      return;
+    }
+    if (data.type === "follow-up") {
+      const prompt = data.prompt;
+      if (
+        typeof prompt !== "string" ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      const title = data.title;
+      globalThis.prompt(typeof title === "string" ? title : prompt, prompt);
+    }
+  });
+  channel.port1.start();
+  const srcdoc = frame.dataset.srcdoc;
+  if (srcdoc == null) {
+    return;
+  }
+  globalThis.addEventListener("resize", () => {
+    const height = Number.parseFloat(frame.style.height);
+    if (!Number.isFinite(height) || height <= viewportHeight) {
+      frame.style.removeProperty("height");
+    }
+    viewportHeight = globalThis.innerHeight;
+    channel.port1.postMessage({ type: "measure" });
+  });
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.contentWindow?.postMessage(
+        { type: "codex-visualization-initialize" },
+        "*",
+        [channel.port2],
+      );
+    },
+    { once: true },
+  );
+  // Match the trusted bootstrap element, not the same text in an authored title.
+  frame.srcdoc = srcdoc.replace(
+    '<script type="application/json" id="codex-visualization-widget-state">__CODEX_VISUALIZATION_WIDGET_STATE__<\/script>',
+    () =>
+      '<script type="application/json" id="codex-visualization-widget-state">' +
+      JSON.stringify(initialGlobals).replaceAll("<", "\\u003c") +
+      "<\/script>",
+  );
+  delete frame.dataset.srcdoc;
+})();
+</script>
+</body>
+</html>
